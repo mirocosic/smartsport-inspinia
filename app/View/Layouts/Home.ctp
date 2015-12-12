@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>INSPINIA | Main view</title>
-    
-    <!-- load ExtJS 
-    <script src="/js/ext/ext-all.js"></script>
-    -->
-     <!-- load Theme Triton 
-    <script src="/ext-themes/theme-triton/theme-triton.js"></script>
+
+    <!-- Ext Theme -->
     <link rel="stylesheet" href="/ext-themes/theme-triton/resources/theme-triton-all.css"/>
- -->
+
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
 
+    <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
 </head>
 
 <body>
@@ -74,61 +73,6 @@
 
     </div>
 </div>
-
-<!-- Mainly scripts -->
-<script src="/js/jquery-2.1.1.js"></script>
-<script src="/js/jquery-ui-1.10.4.min.js"></script>
-
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-
-<!-- Custom and plugin javascript -->
-<script src="/js/inspinia.js"></script>
-<script src="/js/plugins/pace/pace.min.js"></script>
-<script src="/js/plugins/masonry/masonry.pkgd.min.js"></script>
-
-
-<script>
-   $(document).ready(function(){
-
-        $('.grid').masonry({
-            // options
-            itemSelector: '.grid-item',
-            columnWidth: 300,
-            gutter: 25
-        });
-
-    });
-</script>
-
-
-<script>
-    $(document).ready(function(){
-        $("#sortable1, #sortable2, #sortable3").sortable({
-          connectWith: ".connectedSortable"
-        }).disableSelection();
-        
-         $("#sortable1, #sortable2").sortable({
-            stop: function( event, ui ) {
-                var array = $( "#sortable2" ).sortable( "toArray" );
-                $('#nestable2-output').html(array);
-                $('.grid').masonry("layout");
-            }
-        });
-        $('.ibox-content').on('hidden.bs.collapse', function(e){
-            alert('Fired!');
-        });
-        
-        $('.ibox-content').on('shown.bs.collapse', function(e){
-            alert('Fired!');
-        });
-       
-    });
-    
-   
-</script>
 
 
 </body>

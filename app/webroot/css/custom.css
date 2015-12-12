@@ -1,0 +1,16 @@
+/************ custom overrides ***********/
+
+.dd-item-dragged > .dd-handle{
+    -webkit-box-shadow: 5px 0px 5px 10px black;
+    -moz-box-shadow: 5px 0px 5px 10px black;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.dd-handle {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 0px 0px rgba(0, 0, 0, 0.24);
+    transition: all 0.2s ease-in-out;
+}
+
+.dd-handle:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}

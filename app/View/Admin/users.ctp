@@ -2,6 +2,9 @@
     
 </div>
 
+<?=$this->element('Ext');?>
+<?=$this->element('Scripts');?>
+
 <script>
 Ext.onReady(function() {
    var usersStore = Ext.create('Ext.data.Store',{

@@ -1,9 +1,9 @@
 <?php
 class User extends AppModel {
-    public $belongsTo = array('Group','ClubGroup');
+    public $belongsTo = array('Group');
     public $actsAs = array('Acl' => array('type' => 'requester'));
     
-    public $hasMany = array('ClubMembership');
+    public $hasMany = array('ClubMembership','ClubGroupMembership');
     
     public $hasAndBelongsToMany = array(
         'Club'=>array(

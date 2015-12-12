@@ -204,3 +204,6 @@ msgstr "Ime grupe"
 
 msgid "Create"
 msgstr "Kreiraj"
+
+msgid "Deleted"
+msgstr "Obrisano"

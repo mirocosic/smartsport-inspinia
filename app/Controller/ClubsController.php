@@ -1,6 +1,6 @@
 <?php class ClubsController extends AppController {
     
-    var $uses = ['Club','User','ClubMembership'];
+    var $uses = ['Club','User','ClubMembership','ClubGroup'];
     
      public function beforeFilter() {
         parent::beforeFilter();
@@ -31,6 +31,67 @@
     public function groups(){
         $this->layout = 'Home';
         $this->autoRender = 'members';
+
+
+        $this->ClubGroup->contain('User');
+        $clubGroups = $this->ClubGroup->find('all', [
+            'conditions'=>['ClubGroup.club_id'=>$this->Session->read('Auth.Club_id')],
+            'contain'=>['User.name','User.surname','User.id']
+        ]);
+
+        $this->set('clubGroups',$clubGroups);
+    }
+
+    function addClubGroup(){
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        if (empty($this->request->data['name'])){
+            $response['success'] = false;
+            $response['message'] = __("Please enter group name");
+            return json_encode($response);
+        }
+
+        $saveData = array(
+            'ClubGroup'=>array(
+                'name'=>$this->request->data('name'),
+                'club_id'=>$this->request->data('club_id')
+            )
+        );
+
+        if ($this->ClubGroup->save($saveData)){
+            $response['success'] = true;
+            $response['message'] = __('Group successfully saved');
+
+        } else {
+            $response['success'] = false;
+            $response['message'] = __('Error while saving. Please contact your Administrator.');
+        }
+
+        return json_encode($response);
+    }
+
+    function deleteClubGroup(){
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        $this->ClubGroup->id = $this->request->data('id');
+
+        if($this->ClubGroup->delete()){
+            $response['success'] = true;
+            $response['message'] = __('Deleted');
+            return json_encode($response);
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Oops!';
+            return json_encode($response);
+        }
     }
     
     function add(){

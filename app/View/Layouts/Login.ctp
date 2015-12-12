@@ -33,9 +33,23 @@
             </div>
             <h3><?=__("Welcome to SmartSport");?></h3>
        
-            <?php echo $this->Form->create('User',array('id'=>'LoginForm', 'action'=>'login','class'=>'m-t'));?>
-            <?= $this->Form->input('email',array('placeholder'=>__("Email"),'label'=>false, 'class'=>'form-control','div'=>'form-group'));?>
-            <?= $this->Form->input('password',array('placeholder'=>__("Password"),'label'=>false, 'class'=>'form-control','div'=>'form-group'));?>
+            <?= $this->Form->create('User',array(
+                'id'=>'LoginForm',
+                'action'=>'login',
+                'class'=>'m-t'));
+            ?>
+            <?= $this->Form->input('email',array(
+                'placeholder'=>__("Email"),
+                'label'=>false,
+                'class'=>'form-control',
+                'div'=>'form-group'));
+            ?>
+            <?= $this->Form->input('password',array(
+                'placeholder'=>__("Password"),
+                'label'=>false,
+                'class'=>'form-control',
+                'div'=>'form-group'));
+            ?>
         <!--    <form class="m-t" role="form" action="/users/login"> 
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="Email" required="">

@@ -4,6 +4,7 @@
         parent::beforeFilter();
         
         $this->layout = 'Home';
+
     }
     
     function index(){

@@ -53,7 +53,7 @@ class AppController extends Controller {
             ),
             'loginRedirect' => '/home',
         ),
-        'DebugKit.Toolbar'
+        //'DebugKit.Toolbar'
     );
     
    function beforeFilter() {
