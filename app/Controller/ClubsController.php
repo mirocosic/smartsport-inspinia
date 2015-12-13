@@ -1,6 +1,6 @@
 <?php class ClubsController extends AppController {
     
-    var $uses = ['Club','User','ClubMembership','ClubGroup'];
+    var $uses = ['Club','User','ClubMembership','ClubGroup','ClubGroupMembership','ClubEvent'];
     
      public function beforeFilter() {
         parent::beforeFilter();
@@ -40,6 +40,12 @@
         ]);
 
         $this->set('clubGroups',$clubGroups);
+
+        $members = $this->Club->find('first',[
+            'conditions'=>['Club.id'=>$this->Session->read('Auth.Club_id')],
+            'contain'=>['User.id','User.name','User.surname']
+        ]);
+        $this->set('members',$members['User']);
     }
 
     function addClubGroup(){
@@ -83,7 +89,7 @@
 
         $this->ClubGroup->id = $this->request->data('id');
 
-        if($this->ClubGroup->delete()){
+        if($this->ClubGroup->deleteAll(['ClubGroup.id'=>$this->request->data('id')])){
             $response['success'] = true;
             $response['message'] = __('Deleted');
             return json_encode($response);
@@ -93,7 +99,99 @@
             return json_encode($response);
         }
     }
-    
+
+    function updateClubGroups(){
+
+
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        $users = array();
+        $group_id = $this->request->data['group_id'];
+        $group_id = str_replace('ClubGroup-','',$group_id);
+
+        foreach($this->request->data['users'] as $user){
+            $user =  str_replace('club-group-user-id-','',$user);
+
+            array_push($users, $user);
+        }
+        $data = array('ClubGroup'=>array('id'=>$group_id),'User'=>array('User'=>$users));
+
+        $this->log($data, 'Default');
+
+        /*
+                $data = array(
+                    0=>array(
+                        'User'=>array('User'=>array(4,5,6,7)),
+                        'ClubGroup'=>array('id'=>1)
+                    ),
+                    1=>array(
+                        'User'=>array('User'=>array(4,5,6,7)),
+                        'ClubGroup'=>array('id'=>2)
+                    ),
+                );
+        */
+        if($this->ClubGroup->saveAll($data)){
+            $response['success'] = true;
+            $response['message'] = 'Saved!';
+            return json_encode($response);
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Ooops!';
+            return json_encode($response);
+        }
+    }
+
+    public function events(){
+        $this->layout = 'Home';
+        $this->autoRender = 'Events';
+
+        $this->set('clubGroups',$this->ClubGroup->find('list')); // add club id condition, check docs
+
+        $this->set('clubMembers',$this->User->find('list')); // add club id condition, check docs
+
+        $events = $this->ClubEvent->find('all',[
+            'conditions' => ['ClubEvent.club_id'=>$this->Session->read('Auth.Club_id')],
+            'contain' => [
+                'User.id','User.fullname',
+                'ClubGroup'=>['User.id','User.fullname']
+            ]
+        ]);
+
+        $this->set('events',$events);
+    }
+
+    function createClubEvent(){
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        $this->request->data['ClubEvent']['club_id'] = $this->Session->read('Auth.Club_id');
+
+        $saveData = [
+            'ClubEvent' => $this->request->data['ClubEvent'],
+            'User' => ['User'=>$this->request->data['User']['id']],
+            'ClubGroup' => ['ClubGroup'=> $this->request->data['ClubGroup']['id'] ]
+        ];
+
+
+
+        if($this->ClubEvent->saveAll($saveData)){
+            $response['success'] = true;
+            $response['message'] = __('Yep! Saved!');
+            return json_encode($response);
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+    }
+
     function add(){
         
     }

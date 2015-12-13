@@ -1,6 +1,8 @@
 <?php class Club extends AppModel {
+
+    var $actsAs = ['Containable'];
     
-    public $hasMany = array('ClubMembership');
+    public $hasMany = array('ClubMembership','ClubEvent');
     
     public $hasAndBelongsToMany = array(
         'User'=>array(

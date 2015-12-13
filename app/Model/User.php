@@ -1,7 +1,7 @@
 <?php
 class User extends AppModel {
     public $belongsTo = array('Group');
-    public $actsAs = array('Acl' => array('type' => 'requester'));
+    public $actsAs = array('Acl' => array('type' => 'requester'),'Containable');
     
     public $hasMany = array('ClubMembership','ClubGroupMembership');
     
@@ -15,6 +15,12 @@ class User extends AppModel {
             
         )
     );
+
+    public $virtualFields = array(
+        'fullname' => "CONCAT(User.name, ' ', User.surname)"
+    );
+
+    public $displayField = 'fullname';
 
     public function parentNode() {
         if (!$this->id && empty($this->data)) {

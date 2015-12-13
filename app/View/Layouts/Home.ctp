@@ -13,6 +13,10 @@
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
+    <link href="/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+    <link href="/css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">

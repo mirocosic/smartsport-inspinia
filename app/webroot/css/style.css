@@ -38,6 +38,7 @@ h5 {
   color: #a7b1c2;
   font-weight: 600;
   padding: 14px 20px 14px 25px;
+  transition: all 0.2s ease-in-out;
 }
 .nav.navbar-right > li > a {
   color: #999c9e;
@@ -49,6 +50,7 @@ h5 {
 .navbar-default .nav > li > a:focus {
   background-color: #293846;
   color: white;
+
 }
 .nav .open > a,
 .nav .open > a:hover,
@@ -107,6 +109,7 @@ h5 {
 }
 .dropdown-menu > li > a.font-bold {
   font-weight: 600;
+  transition: all 0.1s ease-in-out;
 }
 .navbar-top-links .dropdown-menu li {
   display: block;

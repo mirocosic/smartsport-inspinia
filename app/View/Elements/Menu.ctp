@@ -19,47 +19,47 @@
                     </div>
                 </li>
                  <li <?if($this->params['controller'] == 'clubs' ||$this->params['controller'] == 'club'){echo 'class="active"';}?>>
-                    <a href="/clubs/view"><i class="fa fa-slideshare"></i> <span class="nav-label"><?=__("Club");?></span> <span class="fa arrow"></span></a>
+                    <a href="/clubs/view"><i class="fa fa-slideshare"></i> <span class="nav-label"><?=__("Club");?></span> <span class="fa arrow fa-fw"></span></a>
                     <ul class="nav nav-second-level collapse">
                          <li <?if($this->params['action'] == 'members'){echo 'class="active"';}?>>
-                            <a href="/clubs/members"><i class="fa fa-users"></i><span class="nav-label"><?=__("Members");?></span></a>
+                            <a href="/clubs/members"><i class="fa fa-user fa-fw"></i><span class="nav-label"><?=__("Members");?></span></a>
                         </li>
                         <li <?if($this->params['action'] == 'groups'){echo 'class="active"';}?>>
-                            <a href="/club/groups"><i class="fa fa-users"></i> <span class="nav-label"><?=__("Groups");?></span></a>
+                            <a href="/club/groups"><i class="fa fa-users fa-fw"></i> <span class="nav-label"><?=__("Groups");?></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-money"></i> <span class="nav-label"><?=__('Fees');?></span></a>
+                            <a href="#"><i class="fa fa-money fa-fw"></i> <span class="nav-label"><?=__('Fees');?></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-file-text-o"></i><span class="nav-label">Evidencija treninga</span></a>
+                            <a href="/clubs/events"><i class="fa fa-file-text-o fa-fw"></i><span class="nav-label">Evidencija treninga</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-area-chart"></i> <span class="nav-label">Statistike</span></a>
+                            <a href="#"><i class="fa fa-area-chart fa-fw"></i> <span class="nav-label">Statistike</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-calendar"></i> <span class="nav-label"><?=__('Calendar');?></span></a>
+                            <a href="#"><i class="fa fa-calendar fa-fw"></i> <span class="nav-label"><?=__('Calendar');?></span></a>
                         </li>
                     </ul>
                 </li>
                 
                
                 <li <?if($this->params['controller'] == 'admin'){echo 'class="active"';}?>>
-                    <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Admin</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-magic fa-fw"></i> <span class="nav-label">Admin</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="/admin/users"><i class="fa fa-users"></i><span class="nav-label"><?=__("Users");?></span></a>
+                            <a href="/admin/users"><i class="fa fa-users fa-fw"></i><span class="nav-label"><?=__("Users");?></span></a>
                         </li>
                         <li>
-                            <a href="/admin/clubs"><i class="fa fa-slideshare"></i><span class="nav-label"><?=__("Clubs");?></span></a>
+                            <a href="/admin/clubs"><i class="fa fa-slideshare fa-fw"></i><span class="nav-label"><?=__("Clubs");?></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bank"></i><span class="nav-label"><?=__("Alliances");?></span></a>
+                            <a href="#"><i class="fa fa-bank fa-fw"></i><span class="nav-label"><?=__("Alliances");?></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-trophy"></i><span class="nav-label"><?=__("Competitions");?></span></a>
+                            <a href="#"><i class="fa fa-trophy fa-fw"></i><span class="nav-label"><?=__("Competitions");?></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-lock"></i><span class="nav-label"><?=__("Permisions");?></span></a>
+                            <a href="#"><i class="fa fa-lock fa-fw"></i><span class="nav-label"><?=__("Permisions");?></span></a>
                         </li>
                     </ul>
                     

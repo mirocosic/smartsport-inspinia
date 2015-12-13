@@ -207,3 +207,12 @@ msgstr "Kreiraj"
 
 msgid "Deleted"
 msgstr "Obrisano"
+
+msgid "Create event"
+msgstr "Kreiraj event"
+
+msgid "training"
+msgstr "trening"
+
+msgid "competition"
+msgstr "natjecanje"

@@ -1,6 +1,5 @@
 <div id="PageContent" class="wrapper wrapper-content animated fadeInRight">
 
-    <?=debug($clubGroups);?>
 
     <div class="row">
         <div class="col-lg-12">
@@ -15,32 +14,37 @@
             </div>
         </div>
     </div>
+
+
    
     <div class="grid">
-        <div id="ClubGroup-All" class="grid-item">
-            <div id="AllMembersPanel" class="ibox">
-                <div class="ibox-title">
-                    <h5><?=__("All members");?></h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
 
+                <div id="ClubGroup-All" class="grid-item">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5><?=__('All');?></h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <ul id="ClubGroup-All" class="connectedSortable sortable-groups" style="padding:0;min-height:20px;">
+                                <?if($members):?>
+                                    <?foreach($members as $member):?>
+                                        <li id="club-group-user-id-<?=$member['id'];?>" class=" dd-item">
+                                            <div id="0" class="dd-handle"><?=$member['name'].' '.$member['surname'];?></div>
+                                        </li>
+                                    <?endforeach;?>
+                                <?endif;?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="ibox-content">
-                    <ul id="sortable1" class="connectedSortable" style="min-height: 10px;padding:0;">
-                      <li id="club-group-user-id-0" class="dd-item">
-                          <div class="dd-handle">  Item 1</div>
-                      </li>
-                      <li id="club-group-user-id-0"class="dd-item"><div class="dd-handle">  Item 1</div></li>
-                      <li id="club-group-user-id-0"class="ui-state- dd-item"><div class="dd-handle">  Item 1</div></li>
-                      <li id="club-group-user-id-0"class="ui-state- dd-item"><div class="dd-handle">  Item 1</div></li>
-                      <li id="club-group-user-id-0"class="ui-state- dd-item"><div class="dd-handle">  Item 1</div></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
 
         <? if($clubGroups):?>
             <? foreach($clubGroups as $clubGroup):?>
@@ -59,7 +63,7 @@
                         </div>
                         <div class="ibox-content">
 
-                            <ul id="sortable3" class="connectedSortable" style="padding:0;min-height:20px;">
+                            <ul id="ClubGroup-<?=$clubGroup['ClubGroup']['id'];?>" class="connectedSortable sortable-groups" style="padding:0;min-height:20px;">
                                 <?foreach($clubGroup['User'] as $user):?>
                                     <li id="club-group-user-id-<?=$user['id'];?>" class=" dd-item">
                                         <div id="0" class="dd-handle"><?=$user['name'].' '.$user['surname'];?></div>
@@ -138,33 +142,46 @@
         });
 
     });
+
+    function updateGrid(){
+
+        $('.grid').delay('500').masonry('layout');
+
+    }
 </script>
 
 
 <script>
     $(document).ready(function(){
 
-        $("#sortable1, #sortable2, #sortable3").sortable({
-            connectWith: ".connectedSortable"
+        $(".sortable-groups").sortable({
+            //connectWith: ".connectedSortable"
         }).disableSelection();
 
-        $("#sortable1, #sortable2, #sortable3").sortable({
+        $(".sortable-groups").sortable({
             start:function(event, ui){
                 $(ui.item).addClass('dd-item-dragged');
                 $('.grid').masonry("layout");
             },
             stop: function( event, ui ) {
                 $(ui.item).removeClass('dd-item-dragged');
-                var array = $( "#sortable3" ).sortable( "toArray" );
-                console.log(array);
+
                 $('.grid').masonry("layout");
+            },
+            update: function(event, ui){
+                var clubGroupId = $(this).attr('id');
+                var data = $(this).sortable('toArray');
+
+                updateClubGroups(clubGroupId, data);
             }
         });
-        $('.ibox-content').on('hidden.bs.collapse', function(e){
+
+        // to do
+        $(document).on('hide.bs.collapse', function(e){
             alert('Fired!');
         });
 
-        $('.ibox-content').on('shown.bs.collapse', function(e){
+        $('.ibox-content').on('show.bs.collapse', function(e){
             alert('Fired!');
         });
 
@@ -225,6 +242,27 @@
                 toastr.error("<?=__('We\'re sorry!').' '.__('Something went wrong');?>");
             }
         });
+    }
+    function updateClubGroups(group_id, users){
+        $.ajax({
+            url:'/clubs/updateClubGroups',
+            data:{
+                group_id:group_id,
+                users:users
+            },
+            type:'POST',
+            success:function(data){
+                if(data.success){
+                    toastr.success(data.message);
+
+                } else {
+                    toastr.error(data.message);
+                }
+            },
+            error:function(){
+                toastr.error("<?=__('We\'re sorry!').' '.__('Something went wrong');?>");
+            }
+        })
     }
 
 </script>
