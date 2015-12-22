@@ -1,6 +1,6 @@
 <?php class ClubsController extends AppController {
     
-    var $uses = ['Club','User','ClubMembership','ClubGroup','ClubGroupMembership','ClubEvent'];
+    var $uses = ['Club','User','ClubMembership','ClubGroup','ClubGroupMembership','ClubEvent','ClubEventMembership'];
     
      public function beforeFilter() {
         parent::beforeFilter();
@@ -190,6 +190,44 @@
             $response['message'] = 'Empty data sent!';
             return json_encode($response);
         }
+    }
+
+    function updateAttendance(){
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+        //update field where ids match
+        $record = $this->ClubEventMembership->find('first',[
+           'conditions'=>[
+               'ClubEventMembership.user_id'=>$this->request->data['user_id'],
+               'ClubEventMembership.club_event_id'=>$this->request->data['event_id'],
+            ]
+        ]);
+        if($this->request->data['attended'] == 'true'){$attended = true;} else {$attended = false;}
+        if ($record) {
+            $this->ClubEventMembership->clear();
+            $this->ClubEventMembership->id = $record['ClubEventMembership']['id'];
+            $saveData = array(
+                'id'=>$record['ClubEventMembership']['id'],
+                'attended'=>$attended
+            );
+
+            $this->ClubEventMembership->save($saveData);
+
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Error finding record';
+            return json_encode($response);
+        }
+
+        $response['success'] = true;
+        $response['message'] = 'Update success';
+        return json_encode($response);
+
+
+
     }
 
     function add(){
