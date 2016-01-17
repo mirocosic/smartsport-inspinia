@@ -21,29 +21,41 @@
     function clubs(){}
 
     function applyAco() {
-        $this->autoRender = false;
-        $this->layout = false;
+       // $this->autoRender = false;
+       // $this->layout = false;
+
+        if (empty($this->request->data)){
+
+            $this->set('message','Enter controller/action name');
+            return;
+        }
+
         $aco = & $this->Acl->Aco;
-        //51 in proc
-        //52 history
 
+        if (!empty($this->request->data['Aco']['parent'])){
+            $parent_id = $this->request->data['Aco']['parent'];
+        } else {
+            $parent_id = 1; // default!
+        }
 
-        $list = array('events');
+        $list = array($this->request->data['Aco']['alias']);
 
 
         foreach ($list as $text) {
             $permissions[] = array(
-                'parent_id'=>9,
+                'parent_id'=>$parent_id,
                 'alias' => $text
             );
         }
 
-     //   print_r($permissions);
+        $this->set('perms',$permissions);
 
         foreach ($permissions as $data) {
             $aco->clear();
             $aco->save($data);
         }
+
+        $this->set('lastID',$aco->id);
     }
 
     function testAco() {
