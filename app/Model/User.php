@@ -1,7 +1,7 @@
 <?php
 class User extends AppModel {
     public $belongsTo = array('Group');
-    public $actsAs = array('Acl' => array('type' => 'requester'),'Containable');
+    public $actsAs = array('Acl' => array('type' => 'requester','enabled'=>false),'Containable');
     
     public $hasMany = array('ClubMembership','ClubGroupMembership');
     
@@ -70,5 +70,9 @@ class User extends AppModel {
 	} else {
 		return false;	
 	}
+    }
+
+    function bindNode($user) {
+        return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 }

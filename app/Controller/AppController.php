@@ -63,6 +63,7 @@ class AppController extends Controller {
        
         $this->Auth->unauthorizedRedirect = false;
         $this->Auth->authError = "Access Denied";
+
        
         $this->_setLanguage();
         //upaliti ako ima problema sa Auth i localization - i saznati kak radi :D

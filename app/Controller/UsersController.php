@@ -5,7 +5,7 @@
     
     public function beforeFilter() {
         parent::beforeFilter();
-       // $this->Auth->allow('login','logout','view','register');
+        $this->Auth->allow('login','logout');
     }
     
     public function login() {
