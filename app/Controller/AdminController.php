@@ -22,7 +22,7 @@
 
     function applyAco() {
        // $this->autoRender = false;
-       // $this->layout = false;
+        $this->layout = 'Home';
 
         if (empty($this->request->data)){
 

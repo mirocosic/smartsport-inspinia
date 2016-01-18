@@ -59,7 +59,7 @@
                             <a href="#"><i class="fa fa-trophy fa-fw"></i><span class="nav-label"><?=__("Competitions");?></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-lock fa-fw"></i><span class="nav-label"><?=__("Permisions");?></span></a>
+                            <a href="/admin/applyAco"><i class="fa fa-lock fa-fw"></i><span class="nav-label"><?=__("Permisions");?></span></a>
                         </li>
                     </ul>
                     

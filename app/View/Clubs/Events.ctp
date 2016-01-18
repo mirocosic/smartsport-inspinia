@@ -70,19 +70,28 @@
         </div>
     </div>
 
-    <?debug($events);?>
+
 
     <div class="row">
         <?if($events):?>
         <?foreach($events as $event):?>
-            <div class="ibox">
+            <div class="ibox <?if($event['ClubEvent']['date'] < date('Y-m-d',time())){echo 'collapsed';};?>">
                 <div class="ibox-title">
-                    <h5><?=$event['ClubEvent']['name'].' - '.$event['ClubEvent']['date'] ;?></h5>
+                    <h5><?=$event['ClubEvent']['name'].' - '.date('d.m.Y',strtotime($event['ClubEvent']['date'])) ;?></h5>
                     <div class="ibox-tools">
+
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-cog"></i>
+                        </a>
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Edit</a>
+                            </li>
+                            <li><a href="#">Delete</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="ibox-content">

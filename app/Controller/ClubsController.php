@@ -158,7 +158,8 @@
             'contain' => [
                 'User.id','User.fullname',
                 'ClubGroup'=>['User.id','User.fullname']
-            ]
+            ],
+            'order'=>'ClubEvent.date DESC'
         ]);
 
         $this->set('events',$events);
@@ -172,6 +173,8 @@
         }
 
         $this->request->data['ClubEvent']['club_id'] = $this->Session->read('Auth.Club_id');
+
+        $this->request->data['ClubEvent']['date'] = date('Y-m-d H:i:s',strtotime( $this->request->data['ClubEvent']['date']));
 
         $saveData = [
             'ClubEvent' => $this->request->data['ClubEvent'],
