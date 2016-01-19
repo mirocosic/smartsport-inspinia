@@ -176,6 +176,25 @@
 
         $this->request->data['ClubEvent']['date'] = date('Y-m-d H:i:s',strtotime( $this->request->data['ClubEvent']['date']));
 
+        if (empty($this->request->data['User']['id'])){
+            $this->request->data['User']['id'] = array();
+        }
+
+        //save all users from groups
+        if (!empty($this->request->data['ClubGroup']['id'])){
+            foreach($this->request->data['ClubGroup']['id'] as $clubGroupId){
+                $groupUsers = $this->ClubGroup->find('first',array(
+                    'conditions'=>array('ClubGroup.id'=>$clubGroupId),
+                    'contain'=>array('User.id')
+                ));
+                foreach($groupUsers['User'] as $user){
+                    array_push($this->request->data['User']['id'],$user['id']);
+                }
+            }
+        }
+
+        $this->log(print_r($this->request->data, true),'clubevent');
+
         $saveData = [
             'ClubEvent' => $this->request->data['ClubEvent'],
             'User' => ['User'=>$this->request->data['User']['id']],

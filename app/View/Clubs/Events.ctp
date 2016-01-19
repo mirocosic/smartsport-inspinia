@@ -111,14 +111,14 @@
                     <?foreach($event['ClubGroup'] as $clubGroup):?>
 
                         <?foreach($clubGroup['User'] as $user):?>
-
+                        <!--
                             <div class="checkbox checkbox-success">
                                 <input id="checkbox#<?=$user['id'].'&'.$event['ClubEvent']['id'];?>*" type="checkbox" class="attendanceCheckbox">
                                 <label for="checkbox#<?=$user['id'].'&'.$event['ClubEvent']['id'];?>*">
                                     <?=$user['fullname'];?>
                                 </label>
                             </div>
-
+                        -->
 
 
                         <? endforeach;?>
