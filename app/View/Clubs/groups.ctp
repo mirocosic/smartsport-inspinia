@@ -155,7 +155,7 @@
     $(document).ready(function(){
 
         $(".sortable-groups").sortable({
-            //connectWith: ".connectedSortable"
+            connectWith: ".connectedSortable"
         }).disableSelection();
 
         $(".sortable-groups").sortable({

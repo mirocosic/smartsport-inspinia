@@ -75,7 +75,7 @@
     <div class="row">
         <?if($events):?>
         <?foreach($events as $event):?>
-            <div class="ibox <?if($event['ClubEvent']['date'] < date('Y-m-d',time())){echo 'collapsed';};?>">
+            <div id="ClubEvent-<?=$event['ClubEvent']['id'];?>" class="ibox <?if($event['ClubEvent']['date'] < date('Y-m-d',time())){echo 'collapsed';};?>">
                 <div class="ibox-title">
                     <h5><?=$event['ClubEvent']['name'].' - '.date('d.m.Y',strtotime($event['ClubEvent']['date'])) ;?></h5>
                     <div class="ibox-tools">
@@ -89,7 +89,7 @@
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#">Edit</a>
                             </li>
-                            <li><a href="#">Delete</a>
+                            <li><a onclick="deleteClubEvent(<?=$event['ClubEvent']['id'];?>);">Delete</a>
                             </li>
                         </ul>
                     </div>
@@ -106,7 +106,7 @@
                             </label>
                         </div>
 
-                    <?endforeach;?>
+                    <? endforeach;?>
 
                     <?foreach($event['ClubGroup'] as $clubGroup):?>
 
@@ -122,12 +122,12 @@
 
 
                         <? endforeach;?>
-                    <?endforeach;?>
+                    <? endforeach;?>
                         </fieldset>
                 </div>
             </div>
-        <?endforeach;?>
-        <?endif;?>
+        <? endforeach;?>
+        <? endif;?>
     </div>
 </div>
 
@@ -228,4 +228,25 @@
         });
     });
 
+    function deleteClubEvent(club_event_id){
+        $.ajax({
+            url:'/clubs/deleteClubEvent',
+            data:{
+                event_id:club_event_id
+            },
+            type:'POST',
+            dataType:'JSON',
+            success:function(response){
+                if(response.success){
+                    toastr.success(response.message);
+                    $('#ClubEvent-'+club_event_id).remove();
+                } else{
+                    toastr.error(response.message);
+                }
+            },
+            error:function(){
+
+            }
+        });
+    }
 </script>

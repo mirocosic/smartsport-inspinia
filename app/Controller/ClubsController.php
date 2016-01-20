@@ -214,6 +214,25 @@
         }
     }
 
+    function deleteClubEvent(){
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = __('Empty data sent!');
+            return json_encode($response);
+        }
+
+        if ($this->ClubEvent->delete($this->request->data['event_id'], true)){
+            $response['success'] = true;
+            $response['message'] = __('Yep! Gone!');
+            return json_encode($response);
+        } else {
+            $response['success'] = false;
+            $response['message'] = __('Ooops! Something went wrong!');
+           return json_encode($response);
+        }
+
+    }
+
     function updateAttendance(){
         if (empty($this->request->data)){
             $response['success'] = false;
