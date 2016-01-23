@@ -1,6 +1,7 @@
 <?php class ClubsController extends AppController {
     
-    var $uses = ['Club','User','ClubMembership','ClubGroup','ClubGroupMembership','ClubEvent','ClubEventMembership'];
+    var $uses = ['Club','User','UsersClub', 'ClubMembership','ClubGroup','ClubGroupMembership','ClubEvent','ClubEventMembership',
+    'MembershipFee'];
     
      public function beforeFilter() {
         parent::beforeFilter();
@@ -46,6 +47,35 @@
             'contain'=>['User.id','User.name','User.surname']
         ]);
         $this->set('members',$members['User']);
+    }
+
+    function fees(){
+        $this->layout = 'Home';
+        $this->autoRender = 'fees';
+
+        // 1. korak ->dohvatiti listu user ideva u tom klubu
+        // 2. korak -> naci usere i contain fees sa uvjetom
+
+
+
+        /// test 2. korak
+
+        $result = $this->ClubMembership->find('all',[
+            'conditions'=>['ClubMembership.club_id'=>1],
+            'fields'=>'ClubMembership.user_id'
+        ]);
+        $userIds = array();
+        foreach ($result as $item){
+            array_push($userIds,$item['ClubMembership']['user_id']);
+        }
+
+        $result = $this->User->find('all',[
+            'conditions'=>['User.id'=>$userIds],
+            'contain'=>['MembershipFee']
+        ]);
+
+
+        $this->set('fees',$result);
     }
 
     function addClubGroup(){

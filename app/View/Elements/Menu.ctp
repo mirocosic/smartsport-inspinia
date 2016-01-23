@@ -25,10 +25,10 @@
                             <a href="/clubs/members"><i class="fa fa-user fa-fw"></i><span class="nav-label"><?=__("Members");?></span></a>
                         </li>
                         <li <?if($this->params['action'] == 'groups'){echo 'class="active"';}?>>
-                            <a href="/club/groups"><i class="fa fa-users fa-fw"></i> <span class="nav-label"><?=__("Groups");?></span></a>
+                            <a href="/clubs/groups"><i class="fa fa-users fa-fw"></i> <span class="nav-label"><?=__("Groups");?></span></a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> <span class="nav-label"><?=__('Fees');?></span></a>
+                        <li  <?if($this->params['action'] == 'fees'){echo 'class="active"';}?>>
+                            <a href="/clubs/fees"><i class="fa fa-money fa-fw"></i> <span class="nav-label"><?=__('Fees');?></span></a>
                         </li>
                         <li>
                             <a href="/clubs/events"><i class="fa fa-file-text-o fa-fw"></i><span class="nav-label">Evidencija treninga</span></a>
