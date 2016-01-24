@@ -49,19 +49,15 @@
         $this->set('members',$members['User']);
     }
 
-    function fees(){
+    function fees($month = false, $year = false){
         $this->layout = 'Home';
         $this->autoRender = 'fees';
 
-        // 1. korak ->dohvatiti listu user ideva u tom klubu
-        // 2. korak -> naci usere i contain fees sa uvjetom
-
-
-
-        /// test 2. korak
+        if (!$month){$month = date('m');}
+        if (!$year){$year = date('Y');}
 
         $result = $this->ClubMembership->find('all',[
-            'conditions'=>['ClubMembership.club_id'=>1],
+            'conditions'=>['ClubMembership.club_id'=>$this->Session->read('Auth.Club_id')],
             'fields'=>'ClubMembership.user_id'
         ]);
         $userIds = array();
@@ -71,11 +67,19 @@
 
         $result = $this->User->find('all',[
             'conditions'=>['User.id'=>$userIds],
-            'contain'=>['MembershipFee']
+            'contain'=>[
+                'MembershipFee'=>[
+                    'conditions'=>[
+                        'MONTH(MembershipFee.date)'=>date('m', strtotime($year.'/'.$month.'/'.'01')),
+                        'YEAR(MembershipFee.date)'=>date('Y', strtotime($year.'/'.$month.'/'.'01'))
+                    ]
+                ]
+            ]
         ]);
 
-
+        $this->set('month',date('m.Y', strtotime($year.'/'.$month.'/'.'01')));
         $this->set('fees',$result);
+
     }
 
     function addClubGroup(){
@@ -297,6 +301,36 @@
         $response['message'] = 'Update success';
         return json_encode($response);
 
+
+
+    }
+
+    function updateFee(){
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        if($this->request->data['paid'] == 'true'){$paid = true;} else {$paid = false;}
+
+        $data = [
+            'MembershipFee'=>[
+                'id'=>$this->request->data['fee_id'],
+                'user_id'=>$this->request->data['user_id'],
+                'paid'=>$paid
+            ]
+        ];
+
+        if ($this->MembershipFee->save($data)){
+            $response['success'] = true;
+            $response['message'] = 'Update success';
+            return json_encode($response);
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Error while saving';
+            return json_encode($response);
+        }
 
 
     }

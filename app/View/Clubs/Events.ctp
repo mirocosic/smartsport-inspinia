@@ -149,13 +149,13 @@
             var end_pos = test_str.indexOf('&',start_pos);
             var text_to_get = test_str.substring(start_pos,end_pos);
             var user_id = text_to_get;
-            console.log(user_id);
+            //console.log(user_id);
 
             var start_pos = test_str.indexOf('&') + 1;
             var end_pos = test_str.indexOf('*',start_pos);
             var text_to_get = test_str.substring(start_pos,end_pos);
             var event_id = text_to_get;
-            console.log(event_id);
+            //console.log(event_id);
 
             $.ajax({
                 url:'/clubs/updateAttendance',
