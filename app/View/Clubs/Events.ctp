@@ -13,24 +13,28 @@
             </div>
             <div class="ibox-content">
                 <?=$this->Form->create('ClubEvent', ['url' => array('controller' => 'clubs', 'action' => 'createClubEvent')]);?>
+                <div class="row">
                 <?= $this->Form->input('name',array(
                     'placeholder'=>__("Name"),
                     'label'=>false,
                     'class'=>'form-control',
-                    'div'=>'form-group'));
+                    'div'=>'form-group col-md-4'));
                 ?>
+                </div>
                 <div class="form-group" id="data_1">
 
-                    <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <div class="input-group date col-md-4">
+                        <span class="input-group-addon" style="background-color: #1ab394;
+    color: white;"><i class="fa fa-calendar"></i></span>
                         <input name="data[ClubEvent][date]" type="text" class="form-control" placeholder="datum">
                     </div>
                 </div>
 
                 <div class="form-group">
 
-                    <div class="input-group clockpicker" data-autoclose="true">
-                        <span class="input-group-addon">
+                    <div class="input-group clockpicker col-md-4" data-autoclose="true">
+                        <span class="input-group-addon" style="background-color: #1ab394;
+    color: white;">
                             <span class="fa fa-clock-o"></span>
                         </span>
                         <input name="data[ClubEvent][time]" type="text" class="form-control">

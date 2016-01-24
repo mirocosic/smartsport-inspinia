@@ -6,42 +6,38 @@
                 <div class="ibox-title">
                     <h5><?=__('Fees');?></h5>
                     <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
+
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
+                            <i class="fa fa-cog" style="font-size: 16px"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#">Config option 1</a>
+                            <li><a href="#"><?=__('Izvještaj');?></a>
                             </li>
                             <li><a href="#">Config option 2</a>
                             </li>
                         </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
+
                     </div>
                 </div>
                 <div class="ibox-content">
                     <div class="form-group" id="data_4">
-                        <label class="font-noraml">Mjesec</label>
-                        <div class="input-group date">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <label class="font-normal">Mjesec</label>
+                        <div class="input-group date col-md-4">
+                            <span class="input-group-addon" style="background-color:#1ab394; color:white;"><i class="fa fa-calendar"></i></span>
                             <input type="text" class="form-control" value="<?=$month;?>">
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
+                        <table class="table #table-bordered #table-striped" id="FeesTable">
                             <thead>
                                 <tr>
-                                    <th>id</th><th>name</th><th>paid</th><th>note</th>
+                                    <th><?=__('Name');?></th><th><?=__('Paid');?></th><th><?=__('Note');?></th>
                                 </tr>
                             </thead>
                                 <tbody>
                                 <? foreach($fees as $fee):?>
                                 <tr>
-                                    <td><?=$fee['User']['id'];?></td><td><?=$fee['User']['name'].' '.$fee['User']['surname'];?></td>
+                                    <td><?=$fee['User']['name'].' '.$fee['User']['surname'];?></td>
                                     <td>
                                         <div class="checkbox checkbox-success">
                                             <input id="checkbox#<?
@@ -60,7 +56,15 @@
                                     </td>
                                     <?if (!empty($fee['MembershipFee'][0]['note'])){$note = $fee['MembershipFee'][0]['note'];}
                                     else {$note = '';} ?>
-                                    <td><?=$this->Form->input('note', array('label' => false,'value'=>$note));?></td>
+                                    <?if (!empty($fee['MembershipFee'][0]['id'])){$slug = $fee['MembershipFee'][0]['id'];}
+                                    else {$slug = '';}
+                                    ?>
+                                    <td><?=$this->Form->input('note', array(
+                                            'label' => false,
+                                            'value'=>$note,
+                                            'class'=>'FeeNote',
+                                            'id'=>'FeeNote#'.$fee['User']['id'].'*'.$slug
+                                        ));?></td>
                                 </tr>
 
                             <?endforeach;?>
@@ -78,6 +82,59 @@
 
 <script>
     $(document).ready(function(){
+
+        $.event.special.inputchange = {
+            setup: function() {
+                var self = this, val;
+                $.data(this, 'timer', window.setInterval(function() {
+                    val = self.value;
+                    if ( $.data( self, 'cache') != val ) {
+                        $.data( self, 'cache', val );
+                        $( self ).trigger( 'inputchange' );
+                    }
+                }, 2000));
+            },
+            teardown: function() {
+                window.clearInterval( $.data(this, 'timer') );
+            },
+            add: function() {
+                $.data(this, 'cache', this.value);
+            }
+        };
+
+        $('.FeeNote').on('inputchange', function(){
+            var id = $(this).attr('id');
+
+            var start_pos = id.indexOf('#') + 1;
+            var end_pos = id.indexOf('*',start_pos);
+
+            var user_id = id.substring(start_pos,end_pos);
+            var fee_id = id.substring(id.indexOf('*') + 1);
+
+            var note = $(this).val();
+            console.log(note);
+
+            $.ajax({
+                url:'/clubs/updateFeeNote',
+                data:{
+                    user_id:user_id,
+                    fee_id: fee_id,
+                    note: note
+                },
+                type:'POST',
+                dataType:'JSON',
+                success:function(response){
+                    if(response.success){
+                        toastr.success(response.message);
+                    } else{
+                        toastr.error(response.message);
+                    }
+                },
+                error:function(){
+
+                }
+            });
+        })
 
         $('#data_4 .input-group.date').datepicker({
 

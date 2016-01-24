@@ -30,8 +30,8 @@
                         <li  <?if($this->params['action'] == 'fees'){echo 'class="active"';}?>>
                             <a href="/clubs/fees"><i class="fa fa-money fa-fw"></i> <span class="nav-label"><?=__('Fees');?></span></a>
                         </li>
-                        <li>
-                            <a href="/clubs/events"><i class="fa fa-file-text-o fa-fw"></i><span class="nav-label">Evidencija treninga</span></a>
+                        <li <?if($this->params['action'] == 'events'){echo 'class="active"';}?>>
+                            <a href="/clubs/events"><i class="fa fa-file-text-o fa-fw"></i><span class="nav-label">Treninzi</span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-area-chart fa-fw"></i> <span class="nav-label">Statistike</span></a>

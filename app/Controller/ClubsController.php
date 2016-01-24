@@ -335,6 +335,32 @@
 
     }
 
+    function updateFeeNote(){
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        $data = [
+            'MembershipFee'=>[
+                'id'=>$this->request->data['fee_id'],
+                'user_id'=>$this->request->data['user_id'],
+                'note'=>$this->request->data['note']
+            ]
+        ];
+
+        if ($this->MembershipFee->save($data)){
+            $response['success'] = true;
+            $response['message'] = 'Update success';
+            return json_encode($response);
+        } else {
+            $response['success'] = false;
+            $response['message'] = 'Error while saving';
+            return json_encode($response);
+        }
+    }
+
     function add(){
         
     }
