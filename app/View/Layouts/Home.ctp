@@ -17,6 +17,8 @@
     <link href="/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
     <link href="/css/plugins/chosen/chosen.css" rel="stylesheet">
     <link href="/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
 
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
@@ -36,7 +38,7 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="#">
                         <div class="form-group">
-                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                            <input type="text" placeholder="<?=__("Search");?>..." class="form-control" name="top-search" id="top-search">
                         </div>
                     </form>
                 </div>

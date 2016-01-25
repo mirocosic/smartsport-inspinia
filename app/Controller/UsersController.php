@@ -1,7 +1,7 @@
 <?php class UsersController extends AppController {
     
     var $components = ['Email'];
-    var $uses = ['User','ClubMembership'];
+    var $uses = ['User','ClubMembership','UserWeight'];
     
     public function beforeFilter() {
         parent::beforeFilter();
@@ -282,6 +282,39 @@
         }
         
         return json_encode($response);
+    }
+
+    function addWeight(){
+
+    }
+
+    function getWeightData(){
+        $this->layout = false;
+        $this->autoRender = false;
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        $result = $this->UserWeight->find('all',[
+            'conditions'=>['UserWeight.user_id'=>$this->request->data['user_id']],
+            'fields'=>['UserWeight.created', 'UserWeight.weight']
+        ]);
+
+        $data = array();
+        foreach ($result as $item){
+            $row['date'] = $item['UserWeight']['created'];
+            $row['weight']= $item['UserWeight']['weight'];
+            array_push($data, $row);
+        }
+
+        return json_encode($data);
+
+    }
+
+    function profile(){
+        $this->layout = 'Home';
     }
     
 }

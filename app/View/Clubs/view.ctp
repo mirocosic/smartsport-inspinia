@@ -7,4 +7,5 @@
 
     </div>
 </div>
-    
+
+<?=$this->element('Scripts');?>

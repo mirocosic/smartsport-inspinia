@@ -19,13 +19,17 @@
      
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
 
 </head>
 
 <body class="gray-bg">
 
+    <div class="background-div"></div>
+
     <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div>
+        <div style="position: relative; padding: 20px;">
+            <div id="LoginFormBgn" style="position: absolute;background-color: white; opacity:0.8; width: 100%; height:100%;"></div>
             <div>
 
                 <h1 class="logo-name">SS</h1>

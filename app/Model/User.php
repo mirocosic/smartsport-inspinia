@@ -3,7 +3,7 @@ class User extends AppModel {
     public $belongsTo = array('Group');
     public $actsAs = array('Acl' => array('type' => 'requester','enabled'=>false),'Containable');
     
-    public $hasMany = array('ClubMembership','ClubGroupMembership','MembershipFee');
+    public $hasMany = array('ClubMembership','ClubGroupMembership','MembershipFee','UserWeight');
     
     public $hasAndBelongsToMany = array(
         'Club'=>array(

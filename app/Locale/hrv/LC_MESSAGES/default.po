@@ -216,3 +216,30 @@ msgstr "trening"
 
 msgid "competition"
 msgstr "natjecanje"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Calendar"
+msgstr "Kalendar"
+
+msgid "Reports"
+msgstr "Izvještaji"
+
+msgid "Paid"
+msgstr "Plaćeno"
+
+msgid "Note"
+msgstr "Bilješka"
+
+msgid "Welcome to SmartSport management application"
+msgstr "Dobrodošli u SmartSport aplikaciju"
+
+msgid "Search"
+msgstr "Pretraži"
+
+msgid "View"
+msgstr "Pogledaj"
+
+msgid "Edit"
+msgstr "Izmijeni"

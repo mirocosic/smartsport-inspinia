@@ -18,9 +18,26 @@
                         SS
                     </div>
                 </li>
-                 <li <?if($this->params['controller'] == 'clubs' ||$this->params['controller'] == 'club'){echo 'class="active"';}?>>
-                    <a href="/clubs/view"><i class="fa fa-slideshare"></i> <span class="nav-label"><?=__("Club");?></span> <span class="fa arrow fa-fw"></span></a>
+                <li>
+                    <a href="#"><i class="fa fa-eye fa-fw"></i><span class="nav-label"><?=__("Profile");?></span>
+                        <span class="fa arrow fa-fw"></span>
+                    </a>
                     <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="/profile/view"><i class="fa fa-eye fa-fw"></i><span class="nav-label"><?=__("View");?></span></a>
+                        </li>
+                        <li>
+                            <a href="/profile/view"><i class="fa fa-pencil fa-fw"></i><span class="nav-label"><?=__("Edit");?></span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                 <li <?if($this->params['controller'] == 'clubs' ||$this->params['controller'] == 'club'){echo 'class="active"';}?>>
+                    <a href="/clubs/view"><i class="fa fa-slideshare fa-fw"></i> <span class="nav-label"><?=__("Club");?></span> <span class="fa arrow fa-fw"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li <?if($this->params['action'] == 'view'){echo 'class="active"';}?>>
+                            <a href="/clubs/view"><i class="fa fa-eye fa-fw"></i><span class="nav-label"><?=__("Profile");?></span></a>
+                        </li>
                          <li <?if($this->params['action'] == 'members'){echo 'class="active"';}?>>
                             <a href="/clubs/members"><i class="fa fa-user fa-fw"></i><span class="nav-label"><?=__("Members");?></span></a>
                         </li>
@@ -31,7 +48,7 @@
                             <a href="/clubs/fees"><i class="fa fa-money fa-fw"></i> <span class="nav-label"><?=__('Fees');?></span></a>
                         </li>
                         <li <?if($this->params['action'] == 'events'){echo 'class="active"';}?>>
-                            <a href="/clubs/events"><i class="fa fa-file-text-o fa-fw"></i><span class="nav-label">Treninzi</span></a>
+                            <a href="/clubs/events"><i class="fa fa-check-square-o fa-fw"></i><span class="nav-label">Evidencija treninga</span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-area-chart fa-fw"></i> <span class="nav-label">Statistike</span></a>
@@ -39,12 +56,15 @@
                         <li>
                             <a href="#"><i class="fa fa-calendar fa-fw"></i> <span class="nav-label"><?=__('Calendar');?></span></a>
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-book fa-fw"></i> <span class="nav-label"><?=__('Reports');?></span></a>
+                        </li>
                     </ul>
                 </li>
                 
                
                 <li <?if($this->params['controller'] == 'admin'){echo 'class="active"';}?>>
-                    <a href="#"><i class="fa fa-magic fa-fw"></i> <span class="nav-label">Admin</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-magic fa-fw"></i> <span class="nav-label">Admin</span><span class="fa arrow fa-fw"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
                             <a href="/admin/users"><i class="fa fa-users fa-fw"></i><span class="nav-label"><?=__("Users");?></span></a>
