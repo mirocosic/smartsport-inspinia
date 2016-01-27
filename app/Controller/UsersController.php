@@ -235,7 +235,7 @@
     }
     
     function index(){
-        $this->layout = false;
+        $this->layout = 'Home';
         $this->autoRender = false;
         
         $users = $this->User->find('all',[
@@ -284,7 +284,35 @@
         return json_encode($response);
     }
 
+    function weight(){
+        $this->layout = 'Home';
+    }
+
     function addWeight(){
+        $this->layout = false;
+        $this->autoRender = false;
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        if (empty($this->request->data['weight'])){
+            return json_encode(array('success'=>false, 'message'=>__('Enter some weight...')));
+        }
+
+        $data = [
+            'UserWeight'=>[
+                'user_id'=>$this->Auth->user('id'),
+                'weight'=>$this->request->data('weight'),
+            ]
+        ];
+
+        if ($this->UserWeight->save($data)){
+            return json_encode(array('success'=>true, 'message'=>__("Success")));
+        } else {
+            return json_encode(array('success'=>false, 'message'=>__('Error while saving data')));
+        }
 
     }
 

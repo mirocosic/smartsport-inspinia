@@ -10,12 +10,13 @@
     }
     
     function index(){
+
       
     }
    
    
     function users(){
-       
+       $this->layout = 'Home';
     }
     
     function clubs(){}

@@ -23,16 +23,19 @@
                         <span class="fa arrow fa-fw"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="/profile/view"><i class="fa fa-eye fa-fw"></i><span class="nav-label"><?=__("View");?></span></a>
+                        <li <?if($this->params['action'] == 'profile'){echo 'class="active"';}?>>
+                            <a href="/users/profile"><i class="fa fa-eye fa-fw"></i><span class="nav-label"><?=__("View");?></span></a>
                         </li>
                         <li>
                             <a href="/profile/view"><i class="fa fa-pencil fa-fw"></i><span class="nav-label"><?=__("Edit");?></span></a>
                         </li>
+                        <li>
+                            <a href="/users/weight"><i class="fa fa-pencil fa-fw"></i><span class="nav-label"><?=__("Weight");?></span></a>
+                        </li>
                     </ul>
                 </li>
 
-                 <li <?if($this->params['controller'] == 'clubs' ||$this->params['controller'] == 'club'){echo 'class="active"';}?>>
+                 <li ><?if($this->params['controller'] == 'clubs' ||$this->params['controller'] == 'club'){echo 'class="active"';}?>
                     <a href="/clubs/view"><i class="fa fa-slideshare fa-fw"></i> <span class="nav-label"><?=__("Club");?></span> <span class="fa arrow fa-fw"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li <?if($this->params['action'] == 'view'){echo 'class="active"';}?>>

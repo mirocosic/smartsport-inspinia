@@ -243,3 +243,15 @@ msgstr "Pogledaj"
 
 msgid "Edit"
 msgstr "Izmijeni"
+
+msgid "History"
+msgstr "Povijest"
+
+msgid "Weight chart"
+msgstr "Graf težine"
+
+msgid "Error while saving data"
+msgstr "Greška kod spremanja"
+
+msgid "Enter some weight..."
+msgstr "Upiši neku težinu..."
