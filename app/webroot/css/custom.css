@@ -116,3 +116,21 @@ a:hover {
 .logo-name {
     color: #B9B8B8;
 }
+
+.langUrl {
+    font-size: 15px;
+    padding: 4px;
+    margin: 0 2px 0 0 ;
+}
+
+.langUrl.selected {
+
+    background-color: #1ab394;
+    color: white;
+}
+
+.langUrl:hover {
+
+    background-color: #1ab394;
+    color: white;
+}

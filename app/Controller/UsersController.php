@@ -1,7 +1,7 @@
 <?php class UsersController extends AppController {
     
     var $components = ['Email'];
-    var $uses = ['User','ClubMembership','UserWeight'];
+    var $uses = ['User','ClubMembership','UserWeight','Image'];
     
     public function beforeFilter() {
         parent::beforeFilter();
@@ -23,12 +23,27 @@
                    'conditions'=>array(
                        'User.id'=>$this->Auth->user('id')
                        ),
-                   'contain'=>'ClubMembership'
+                   'contain'=>['ClubMembership']
                   
                    )
                        );
+
+                $profileImg = $this->Image->find('first',[
+                    'conditions'=>[
+                        'Image.user_id'=>$this->Auth->user('id'),
+                        'Image.default'=>true]
+                ]);
+
+
               // wow, this is soooo bad :)) - miro
               $this->Session->write('Auth.Club_id', $user['ClubMembership'][0]['club_id']);
+
+              if($profileImg){
+                  $this->Session->write('Auth.ProfileImg', $profileImg['Image']['name']);
+              } else {
+                  $this->Session->write('Auth.ProfileImg', 'user.jpg');
+              }
+
                 
                $response['success'] = true;
                $response['message'] = 'Login successful!';

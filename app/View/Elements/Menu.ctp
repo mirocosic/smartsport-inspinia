@@ -4,10 +4,13 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                         <span>
-                            <img alt="image" class="img-circle" src="/img/profilna.jpg" width="70">
+                            <img alt="image" class="img-circle" src="/img/<?=$_SESSION['Auth']['ProfileImg'];?>" width="70">
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Miro Ćosić</strong>
+                            <span class="clear"> <span class="block m-t-xs">
+                                    <strong class="font-bold">
+                                        <?=AuthComponent::user('fullname');?>
+                                    </strong>
                              </span> <span class="text-muted text-xs block">CTO <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeIn m-t-xs">
                                 <li><a href="#"><?=__("Profile");?></a></li>
@@ -87,8 +90,8 @@
                     </ul>
                     
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-cog"></i> <span class="nav-label"><?=__("Settings");?></span> </a>
+                <li <?if($this->params['controller'] == 'settings'){echo 'class="active"';}?>>
+                    <a href="/settings"><i class="fa fa-cog"></i> <span class="nav-label"><?=__("Settings");?></span> </a>
                 </li>
             </ul>
 

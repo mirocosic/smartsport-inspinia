@@ -43,18 +43,18 @@
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                     <li>
-                        <a href="<?=$this->Html->url(array('language'=>'hrv'));?>">
-                            HR
+                    <li>
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
                         </a>
-                         
                     </li>
-                     <li>
-                        <a href="<?=$this->Html->url(array('language'=>'eng'));?>">
-                             EN
+                    <li>
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
                         </a>
-                         
                     </li>
+
+
                     <li>
                         <a href="/users/logout">
                             <i class="fa fa-sign-out"></i><?=__("Logout");?>

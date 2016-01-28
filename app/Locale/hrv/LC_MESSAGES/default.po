@@ -255,3 +255,15 @@ msgstr "Greška kod spremanja"
 
 msgid "Enter some weight..."
 msgstr "Upiši neku težinu..."
+
+msgid "Enter current weight"
+msgstr "Unesi trenutnu težinu"
+
+msgid "Language"
+msgstr "Jezik"
+
+msgid "Croatian"
+msgstr "Hrvatski"
+
+msgid "English"
+msgstr "Engleski"

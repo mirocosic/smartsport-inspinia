@@ -1,11 +1,12 @@
 <div id="PageContent" class="wrapper wrapper-content animated fadeInRight">
+
     <div class="row">
     <div class="col-lg-12">
         <div class="ibox">
             <div class="ibox-content">
 
                     <div class="col-md-3">
-                        <img alt="image" class="img-responsive" src="/img/profilna.jpg">
+                        <img alt="image" class="img-responsive" src="/img/<?=$_SESSION['Auth']['ProfileImg'];?>">
                     </div>
 
                     <div class="col-md-9">
