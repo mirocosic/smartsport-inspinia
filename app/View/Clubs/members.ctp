@@ -118,10 +118,11 @@ var usersGrid = new Ext.grid.GridPanel({
                                 },{
                                     text:"<?=__('Delete');?>",
                                       handler: function(){
-                                        Ext.MessageBox.confirm("<?=__('Are you sure?');?>","<?=__('Delete user ');?>"+record.data.User.name+"?",function(){
+                                          console.log(record);
+                                        Ext.MessageBox.confirm("<?=__('Are you sure?');?>","<?=__('Delete user ');?>"+record.data.name+"?",function(){
                                             Ext.Ajax.request({
                                                 url: '/users/delete',
-                                                params: {user_id: record.data.User.id},
+                                                params: {user_id: record.data.id},
                                                 success: function (response, opts) {
                                                     var obj = Ext.decode(response.responseText);
                                                     if (obj.success == true){
@@ -133,7 +134,12 @@ var usersGrid = new Ext.grid.GridPanel({
                                                     usersStore.load();
                                                 },
                                                 failure: function (response, opts) {
-                                                     Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Something went wrong...');?>");
+                                                    if (response.status == 403){
+                                                        Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Access denied.');?>");
+                                                    } else {
+                                                        Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Something went wrong...');?>");
+                                                    }
+
                                                 }
                                             });
                                         })
@@ -192,6 +198,11 @@ var usersGrid = new Ext.grid.GridPanel({
                         },{
                             name:"User.club_id",
                             value:<?=$this->Session->read('Auth.Club_id');?>,
+                            allowBlank: true,
+                            hidden:true
+                        },{
+                            name:"User.group_id",
+                            value:2,
                             allowBlank: true,
                             hidden:true
                         }],

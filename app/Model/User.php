@@ -1,7 +1,7 @@
 <?php
 class User extends AppModel {
     public $belongsTo = array('Group');
-    public $actsAs = array('Acl' => array('type' => 'requester','enabled'=>false),'Containable');
+    public $actsAs = array('Acl' => array('type' => 'requester'),'Containable');
     
     public $hasMany = array('ClubMembership','ClubGroupMembership','MembershipFee','UserWeight','Image');
     
@@ -31,14 +31,19 @@ class User extends AppModel {
         } else {
             $groupId = $this->field('group_id');
         }
+
+        $this->log(print_r($this->data, true), 'GROUP');
+
         if (!$groupId) {
             return null;
         }
+
+
         return array('Group' => array('id' => $groupId));
         //return array('model' => 'Group', 'foreign_key' => $groupId);
 
     }
-    
+
     function afterSave($created, $options = array()) {
         if (!$created) {
             $parent = $this->parentNode();
@@ -49,7 +54,7 @@ class User extends AppModel {
             $this->Aro->save($aro);
         }
     }
-    
+
     function CheckOIB($oib) {
 	if ( strlen($oib) == 11 ) {
             if ( is_numeric($oib) ) {
@@ -71,8 +76,9 @@ class User extends AppModel {
 		return false;	
 	}
     }
-
+/*
     function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
+*/
 }

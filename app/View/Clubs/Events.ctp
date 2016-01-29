@@ -17,46 +17,41 @@
                 <?= $this->Form->input('name',array(
                     'placeholder'=>__("Name"),
                     'label'=>false,
-                    'class'=>'form-control',
+                    'class'=>'form-control cleanInput',
                     'div'=>'form-group col-md-4'));
                 ?>
                 </div>
-                <div class="form-group" id="data_1">
-
-                    <div class="input-group date col-md-4">
-                        <span class="input-group-addon" style="background-color: #1ab394;
+                <div class="form-group row" id="data_1">
+                    <div class="col-md-2">
+                        <div class="input-group date ">
+                            <span class="input-group-addon" style="background-color: #1ab394;
     color: white;"><i class="fa fa-calendar"></i></span>
-                        <input name="data[ClubEvent][date]" type="text" class="form-control" placeholder="datum">
+                            <input name="data[ClubEvent][date]" type="text" class="form-control cleanInput" placeholder="<?=__("Date");?>">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group clockpicker" data-autoclose="true">
+                            <span class="input-group-addon" style="background-color: #1ab394;color: white;"><i class="fa fa-clock-o"></i></span>
+                            <input name="data[ClubEvent][time]" type="text" class="form-control cleanInput" placeholder="<?=__('Time');?>">
+                        </div>
                     </div>
                 </div>
-
                 <div class="form-group">
 
-                    <div class="input-group clockpicker col-md-4" data-autoclose="true">
-                        <span class="input-group-addon" style="background-color: #1ab394;
-    color: white;">
-                            <span class="fa fa-clock-o"></span>
-                        </span>
-                        <input name="data[ClubEvent][time]" type="text" class="form-control">
-
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <?$options = array('Amerika'=>'Amerika', 'Croatia'=>'Croatia');?>
                     <?=$this->Form->select('ClubGroup.id',$clubGroups,
                         ['multiple'=>true,
                             'style'=>'width:350px;',
-                            'class'=>"chosen-select form-control",
+                            'class'=>"chosen-select form-control cleanInput",
                             'tabindex'=>'4',
                             'data-placeholder'=>__('Add groups')
 
+
                         ]);?>
+
                 </div>
 
                 <div class="form-group">
-                    <?$options = array('Amerika'=>'Amerika', 'Croatia'=>'Croatia');?>
+
                     <?=$this->Form->select('User.id',$clubMembers,
                         ['multiple'=>true,
                             'style'=>'width:350px;',

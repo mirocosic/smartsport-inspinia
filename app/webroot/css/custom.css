@@ -89,14 +89,19 @@ a:hover {
     background-size: 100%;
 }
 
-#LoginForm input {
+#LoginForm input , .cleanInput{
     background-color: transparent;
     border: none;
     border-bottom: solid 1px #1ab394;
 
 }
 
-#LoginForm input:focus {
+#LoginForm input:focus{
+    border-bottom: solid 1px #0D4F41 !important;
+
+}
+
+.cleanInput:focus{
     border-bottom: solid 1px #0D4F41 !important;
 
 }

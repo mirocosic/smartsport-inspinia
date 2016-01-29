@@ -25,22 +25,31 @@
        // $this->autoRender = false;
         $this->layout = 'Home';
 
+        $acos = $this->Aco->find('list',array(
+            'conditions'=>['Aco.parent_id'=>1],
+            'fields'=>['id','alias']
+        ));
+        $this->set('acos_lvl_1',$acos);
+
         if (empty($this->request->data)){
 
             $this->set('message','Enter controller/action name');
             return;
         }
 
+
+
         $aco = & $this->Acl->Aco;
 
         if (!empty($this->request->data['Aco']['parent'])){
             $parent_id = $this->request->data['Aco']['parent'];
+        } else if(!empty($this->request->data['Aco']['parent_id'])) {
+            $parent_id = $this->request->data['Aco']['parent_id'];
         } else {
             $parent_id = 1; // default!
         }
 
         $list = array($this->request->data['Aco']['alias']);
-
 
         foreach ($list as $text) {
             $permissions[] = array(
