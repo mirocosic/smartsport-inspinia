@@ -1,6 +1,8 @@
 <div id="PageContent" class="wrapper wrapper-content animated fadeInRight">
     
 </div>
+<?=$this->element('Ext');?>
+<?=$this->element('Scripts');?>
 
 <script>
 var clubsStore = Ext.create('Ext.data.Store',{

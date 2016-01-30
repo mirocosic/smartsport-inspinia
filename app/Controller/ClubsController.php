@@ -49,7 +49,7 @@
         $this->set('members',$members['User']);
     }
 
-    function fees($month = false, $year = false){
+    function fees($month = false, $year = false, $club_group_id = false){
         $this->layout = 'Home';
         $this->autoRender = 'fees';
 
@@ -73,10 +73,38 @@
                         'MONTH(MembershipFee.date)'=>date('m', strtotime($year.'/'.$month.'/'.'01')),
                         'YEAR(MembershipFee.date)'=>date('Y', strtotime($year.'/'.$month.'/'.'01'))
                     ]
+                ],
+                'ClubGroupMembership'=>[
+                    'conditions'=>[
+                        'ClubGroupMembership.club_group_id'=>$club_group_id
+                    ]
                 ]
             ]
         ]);
 
+        // znaci filter po clubgroups. ako nije definirana grupa znaci svi, znaci ne filtriram
+        if ($club_group_id){
+            foreach($result as $key => $value){
+                if (empty($value['ClubGroupMembership'])){
+                    unset($result[$key]);
+                }
+            }
+        }
+
+
+
+        $clubGroups = $this->ClubGroup->find('list', [
+            'conditions'=>['ClubGroup.club_id'=>$this->Session->read('Auth.Club_id')],
+            'fields'=>['ClubGroup.id','ClubGroup.name']
+        ]);
+
+        if($club_group_id){
+            $this->set('selectedClubGroup',$club_group_id);
+        } else {
+            $this->set('selectedClubGroup',0);
+        }
+
+        $this->set('clubGroups',$clubGroups);
         $this->set('month',date('m.Y', strtotime($year.'/'.$month.'/'.'01')));
         $this->set('fees',$result);
 

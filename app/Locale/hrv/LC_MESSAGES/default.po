@@ -267,3 +267,24 @@ msgstr "Hrvatski"
 
 msgid "English"
 msgstr "Engleski"
+
+msgid "Add groups"
+msgstr "Dodaj grupe"
+
+msgid "Add members"
+msgstr "Dodaj članove"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Time"
+msgstr "Vrijeme"
+
+msgid "Group"
+msgstr "Grupa"
+
+msgid "Month"
+msgstr "Mjesec"
+
+msgid "All"
+msgstr "Svi"

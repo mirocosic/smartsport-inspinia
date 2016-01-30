@@ -14,55 +14,60 @@
             <div class="ibox-content">
                 <?=$this->Form->create('ClubEvent', ['url' => array('controller' => 'clubs', 'action' => 'createClubEvent')]);?>
                 <div class="row">
-                <?= $this->Form->input('name',array(
-                    'placeholder'=>__("Name"),
-                    'label'=>false,
-                    'class'=>'form-control cleanInput',
-                    'div'=>'form-group col-md-4'));
-                ?>
+                    <?= $this->Form->input('name',array(
+                        'placeholder'=>__("Name"),
+                        'label'=>false,
+                        'class'=>'form-control cleanInput',
+                        'div'=>'form-group col-md-4'));
+                    ?>
                 </div>
-                <div class="form-group row" id="data_1">
-                    <div class="col-md-2">
-                        <div class="input-group date ">
-                            <span class="input-group-addon" style="background-color: #1ab394;
-    color: white;"><i class="fa fa-calendar"></i></span>
-                            <input name="data[ClubEvent][date]" type="text" class="form-control cleanInput" placeholder="<?=__("Date");?>">
+                <div class="row">
+                    <div class="form-group" id="data_1">
+
+                        <div class="col-md-2">
+                            <div class="input-group date ">
+                                <span class="input-group-addon" style="background-color: #1ab394;
+        color: white;"><i class="fa fa-calendar"></i></span>
+                                <input name="data[ClubEvent][date]" type="text" class="form-control cleanInput" placeholder="<?=__("Date");?>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="input-group clockpicker" data-autoclose="true">
-                            <span class="input-group-addon" style="background-color: #1ab394;color: white;"><i class="fa fa-clock-o"></i></span>
-                            <input name="data[ClubEvent][time]" type="text" class="form-control cleanInput" placeholder="<?=__('Time');?>">
+                        <div class="col-md-2">
+                            <div class="input-group clockpicker" data-autoclose="true">
+                                <span class="input-group-addon" style="background-color: #1ab394;color: white;"><i class="fa fa-clock-o"></i></span>
+                                <input name="data[ClubEvent][time]" type="text" class="form-control cleanInput" placeholder="<?=__('Time');?>">
+                            </div>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                        <?=$this->Form->select('ClubGroup.id',$clubGroups,
+                            ['multiple'=>true,
+                                'style'=>'width:155px;margin: 0 20px 0 0;',
+                                'class'=>"chosen-select form-control cleanInput",
+                                'tabindex'=>'3',
+                                'data-placeholder'=>__('Add groups')
 
-                    <?=$this->Form->select('ClubGroup.id',$clubGroups,
-                        ['multiple'=>true,
-                            'style'=>'width:350px;',
-                            'class'=>"chosen-select form-control cleanInput",
-                            'tabindex'=>'4',
-                            'data-placeholder'=>__('Add groups')
 
+                            ]);?>
+                        </div>
+                        <div class="col-md-2">
+                             <?=$this->Form->select('User.id',$clubMembers,
+                                ['multiple'=>true,
+                                    'style'=>'width:155px;',
+                                    'class'=>"chosen-select form-control",
+                                    'tabindex'=>'4',
+                                    'data-placeholder'=>__('Add members')
 
-                        ]);?>
-
+                                ]);?>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-
-                    <?=$this->Form->select('User.id',$clubMembers,
-                        ['multiple'=>true,
-                            'style'=>'width:350px;',
-                            'class'=>"chosen-select form-control",
-                            'tabindex'=>'4',
-                            'data-placeholder'=>__('Add users')
-
-                        ]);?>
-                </div>
-
-                    <button class="btn btn-sm btn-primary"  type="submit"><?=__("Create");?></button>
+                    <button class="btn btn-primary"  type="submit"><?=__("Create");?></button>
                 </form>
             </div>
 

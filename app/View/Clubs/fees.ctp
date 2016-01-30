@@ -8,7 +8,7 @@
                     <div class="ibox-tools">
 
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-cog" style="font-size: 16px"></i>
+                            <i class="fa fa-cog fa-spin-hover" style="font-size: 16px"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><?=__('Izvještaj');?></a>
@@ -20,11 +20,33 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div class="form-group" id="data_4">
-                        <label class="font-normal">Mjesec</label>
-                        <div class="input-group date col-md-4">
-                            <span class="input-group-addon" style="background-color:#1ab394; color:white;"><i class="fa fa-calendar"></i></span>
-                            <input type="text" class="form-control" value="<?=$month;?>">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" id="data_4">
+                                <label class="font-normal"><?=__("Month");?></label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon" style="background-color:#1ab394; color:white;"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control" value="<?=$month;?>">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" id="data_4">
+                                <label class="font-normal"><?=__("Group");?></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="background-color:#1ab394; color:white;"><i class="fa fa-users"></i></span>
+
+                                    <?=$this->Form->input('group',[
+                                        'options'=>$clubGroups,
+                                        'label'=>false,
+                                        'empty'=>__("All"),
+                                        'class'=>'form-control m-b',
+                                        'selected'=>$selectedClubGroup
+                                    ]);?>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -149,8 +171,16 @@
         $('#data_4 input').on('change',function(){
             var date = $(this).val();
             var date_array = date.split('.');
+            var clubGroupId = $( "#group option:selected" ).val();
+            window.location = '/clubs/fees/'+date_array[0]+'/'+date_array[1]+'/'+clubGroupId;
+        });
 
-            window.location = '/clubs/fees/'+date_array[0]+'/'+date_array[1];
+        $('#group').on('change',function(){
+
+            var date = $("#data_4 input").val();
+             var date_array = date.split('.');
+             var clubGroupId = $( "#group option:selected" ).val();
+             window.location = '/clubs/fees/'+date_array[0]+'/'+date_array[1]+'/'+clubGroupId;
         });
 
         $('.feeCheckbox').on('change',function(){

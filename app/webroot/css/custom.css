@@ -139,3 +139,10 @@ a:hover {
     background-color: #1ab394;
     color: white;
 }
+
+.fa-spin-hover {
+    -webkit-animation: spin 2s infinite linear;
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
