@@ -62,16 +62,12 @@
                                     <td><?=$fee['User']['name'].' '.$fee['User']['surname'];?></td>
                                     <td>
                                         <div class="checkbox checkbox-success">
-                                            <input id="checkbox#<?
-                                                echo $fee['User']['id'].'*';
-                                                if (!empty($fee['MembershipFee'][0]['id'])){echo $fee['MembershipFee'][0]['id'];}
-                                                ?>"
+                                            <input id="checkbox<?=$fee['User']['id'];?>"
                                                    class="feeCheckbox"
+                                                   data-user-id="<?=$fee['User']['id'];?>"
+                                                   data-fee-id="<? if (!empty($fee['MembershipFee'][0]['id'])){echo $fee['MembershipFee'][0]['id'];} ?>"
                                                    type="checkbox" <?if(!empty($fee['MembershipFee'][0]['paid']) && $fee['MembershipFee'][0]['paid']){echo "checked";}?>>
-                                            <label for="checkbox#<?
-                                            echo $fee['User']['id'].'*';
-                                            if (!empty($fee['MembershipFee'][0]['id'])){echo $fee['MembershipFee'][0]['id'];}
-                                            ?>">
+                                            <label for="checkbox<?=$fee['User']['id'];?>">
                                                 <?$fee['User']['fullname'];?>
                                             </label>
                                         </div>
@@ -85,7 +81,9 @@
                                             'label' => false,
                                             'value'=>$note,
                                             'class'=>'FeeNote',
-                                            'id'=>'FeeNote#'.$fee['User']['id'].'*'.$slug
+                                            'data-user-id'=>$fee['User']['id'],
+                                            'data-fee-id'=>$slug,
+                                            'id'=>'FeeNote'.$fee['User']['id']
                                         ));?></td>
                                 </tr>
 
@@ -125,29 +123,28 @@
         };
 
         $('.FeeNote').on('inputchange', function(){
-            var id = $(this).attr('id');
-
-            var start_pos = id.indexOf('#') + 1;
-            var end_pos = id.indexOf('*',start_pos);
-
-            var user_id = id.substring(start_pos,end_pos);
-            var fee_id = id.substring(id.indexOf('*') + 1);
-
+            var user_id = $(this).attr('data-user-id');
+            var fee_id = $(this).attr('data-fee-id');
+            var date = $("#data_4 input").val();
             var note = $(this).val();
-            console.log(note);
 
             $.ajax({
                 url:'/clubs/updateFeeNote',
                 data:{
                     user_id:user_id,
                     fee_id: fee_id,
-                    note: note
+                    note: note,
+                    date:date
                 },
                 type:'POST',
                 dataType:'JSON',
                 success:function(response){
                     if(response.success){
                         toastr.success(response.message);
+                        if (response.new_id != false){
+                            $('#checkbox'+user_id).attr('data-fee-id',response.new_id);
+                            $('#FeeNote'+user_id).attr('data-fee-id',response.new_id);
+                        }
                     } else{
                         toastr.error(response.message);
                     }
@@ -184,28 +181,35 @@
         });
 
         $('.feeCheckbox').on('change',function(){
+            /*
             var id = $(this).attr('id');
 
             var start_pos = id.indexOf('#') + 1;
             var end_pos = id.indexOf('*',start_pos);
-
-            var user_id = id.substring(start_pos,end_pos);
-            var fee_id = id.substring(id.indexOf('*') + 1);
+            */
+            var user_id = $(this).attr('data-user-id');
+            var fee_id = $(this).attr('data-fee-id');
             var checked = $(this).is(":checked");
+            var date = $("#data_4 input").val();
 
-            console.log(user_id, checked, fee_id);
             $.ajax({
                 url:'/clubs/updateFee',
                 data:{
                     user_id:user_id,
                     fee_id: fee_id,
-                    paid:checked
+                    paid:checked,
+                    date:date
                 },
                 type:'POST',
                 dataType:'JSON',
                 success:function(response){
                     if(response.success){
                         toastr.success(response.message);
+
+                        if (response.new_id != false){
+                           $('#checkbox'+user_id).attr('data-fee-id',response.new_id);
+                           $('#FeeNote'+user_id).attr('data-fee-id',response.new_id);
+                        }
                     } else{
                         toastr.error(response.message);
                     }

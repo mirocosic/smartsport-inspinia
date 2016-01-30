@@ -342,10 +342,14 @@
 
         if($this->request->data['paid'] == 'true'){$paid = true;} else {$paid = false;}
 
+        $date_array = explode('.',$this->request->data('date'));
+
+
         $data = [
             'MembershipFee'=>[
                 'id'=>$this->request->data['fee_id'],
                 'user_id'=>$this->request->data['user_id'],
+                'date'=>$date_array[1].'-'.$date_array[0].'-01',
                 'paid'=>$paid
             ]
         ];
@@ -353,6 +357,13 @@
         if ($this->MembershipFee->save($data)){
             $response['success'] = true;
             $response['message'] = 'Update success';
+            if (empty($this->request->data['fee_id'])){
+                $response['new_id'] = $this->MembershipFee->id;
+            } else {
+                $response['new_id'] = false;
+            }
+
+
             return json_encode($response);
         } else {
             $response['success'] = false;
@@ -370,15 +381,23 @@
             return json_encode($response);
         }
 
+        $date_array = explode('.',$this->request->data('date'));
+
         $data = [
             'MembershipFee'=>[
                 'id'=>$this->request->data['fee_id'],
                 'user_id'=>$this->request->data['user_id'],
-                'note'=>$this->request->data['note']
+                'note'=>$this->request->data['note'],
+                'date'=>$date_array[1].'-'.$date_array[0].'-01'
             ]
         ];
 
         if ($this->MembershipFee->save($data)){
+            if (empty($this->request->data['fee_id'])){
+                $response['new_id'] = $this->MembershipFee->id;
+            } else {
+                $response['new_id'] = false;
+            }
             $response['success'] = true;
             $response['message'] = 'Update success';
             return json_encode($response);
