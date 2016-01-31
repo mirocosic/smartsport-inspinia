@@ -484,6 +484,90 @@
         
         return json_encode($response);
     }
+
+    function createMember(){
+        $this->layout = false;
+        $this->autoRender = false;
+
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        //if (empty($this->request->data['User_id'])){
+            $this->User->create();
+       // } else {
+         //   $saveData['User']['id'] = $this->request->data['User_id'];
+
+       // }
+
+        $saveData['User']['name'] = trim($this->request->data['User_name']);
+        $saveData['User']['surname'] = trim($this->request->data['User_surname']);
+        $saveData['User']['mail'] = trim($this->request->data['User_mail']);
+        $saveData['User']['username'] = trim($this->request->data['User_mail']);
+        $saveData['User']['oib'] = trim($this->request->data['User_oib']);
+        $saveData['User']['group_id'] = trim($this->request->data['User_group_id']);
+
+        if (!empty($this->request->data['User_password'])){
+            App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+            $passwordHasher = new BlowfishPasswordHasher();
+
+            $saveData['User']['password'] = $passwordHasher->hash($this->request->data['User_password']);
+        }
+
+        if ($this->User->saveAll($saveData)){
+
+              $saveData['ClubMembership']['user_id'] = $this->User->id;
+              $saveData['ClubMembership']['club_id'] = $this->request->data['User_club_id'];
+              $this->User->ClubMembership->save($saveData);
+
+            $response['success'] = true;
+            $response['message'] = __('User successfully saved.');
+        } else {
+            $response['success'] = false;
+            $response['message'] = __('Error while saving. Please contact your Administrator.');
+
+        }
+
+        return json_encode($response);
+    }
+
+    function editMember(){
+        $this->layout = false;
+        $this->autoRender = false;
+
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = 'Empty data sent!';
+            return json_encode($response);
+        }
+
+        $saveData['User']['id'] = $this->request->data['User_id'];
+        $saveData['User']['name'] = trim($this->request->data['User_name']);
+        $saveData['User']['surname'] = trim($this->request->data['User_surname']);
+        $saveData['User']['mail'] = trim($this->request->data['User_mail']);
+        $saveData['User']['username'] = trim($this->request->data['User_mail']);
+        $saveData['User']['oib'] = trim($this->request->data['User_oib']);
+
+        if (!empty($this->request->data['User_password'])){
+            App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+            $passwordHasher = new BlowfishPasswordHasher();
+            $saveData['User']['password'] = $passwordHasher->hash($this->request->data['User_password']);
+        }
+
+        if ($this->User->saveAll($saveData)){
+
+            $response['success'] = true;
+            $response['message'] = __('User successfully saved.');
+        } else {
+            $response['success'] = false;
+            $response['message'] = __('Error while saving. Please contact your Administrator.');
+
+        }
+
+        return json_encode($response);
+    }
     
     function removeMember(){
         if (empty($this->request->data['users_club_id'])){
@@ -493,7 +577,7 @@
         }
         
         if ($this->ClubMembership->delete($this->request->data['users_club_id'])){
-             $response['success'] = true;
+            $response['success'] = true;
             $response['message'] = '';
         } else {
             $response['success'] = false;

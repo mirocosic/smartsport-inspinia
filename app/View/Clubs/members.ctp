@@ -13,7 +13,7 @@ Ext.onReady(function() {
             {name:'User.name',mapping:'name'},
             {name:'User.surname',mapping:'surname'},
             {name:'User.mail',mapping:'mail'},
-            
+            {name:'User.group_id',mapping:'group_id'},
             {name:'User.oib',mapping:'oib'}
 
         ],
@@ -74,8 +74,9 @@ var usersGrid = new Ext.grid.GridPanel({
                                     blankText:"Warning!"
                                 },
                                 items:[{
-                                        xtype:"hidden",
-                                        name:"User.id"
+                                    hidden:true,
+                                    allowBlank: true,
+                                    name:"User.id"
                                 },{
                                     fieldLabel:"<?=__('Name');?>",
                                     name: 'User.name'    
@@ -98,35 +99,45 @@ var usersGrid = new Ext.grid.GridPanel({
                                     value:<?=$this->Session->read('Auth.Club_id');?>,
                                     allowBlank: true,
                                     hidden:true
+                                },{
+                                    name:"User.group_id",
+                                    value:<?=$this->Session->read('Auth.User.group_id');?>,
+                                    allowBlank: true,
+                                    hidden:true
                                 }],
                                 buttons:[{
                                     formBind: true,
                                     text:"<?=__('Save');?>",
                                     handler: function(){
                                         userEditWindow.items.get('userDataForm').getForm().submit({
-                                            url: '/users/edit',
+                                            url: '/clubs/editMember',
                                             success: function (form, action) {
                                                 Ext.Msg.alert("<?=__('Saved');?>", action.result.message);
                                                 usersStore.load();  
                                                 userEditWindow.close();
                                             },
                                             failure: function (form, action) {
-                                                 Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Something went wrong...');?>");
+                                                if (action.response.status == 403){
+                                                    Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Access denied.');?>");
+                                                } else {
+                                                    Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Something went wrong...');?>");
+                                                }
                                             }
                                         });
                                     }
                                 },{
-                                    text:"<?=__('Delete');?>",
+                                    text:"<?=__('Remove');?>",
                                       handler: function(){
                                           console.log(record);
-                                        Ext.MessageBox.confirm("<?=__('Are you sure?');?>","<?=__('Delete user ');?>"+record.data.name+"?",function(){
+                                        Ext.MessageBox.confirm("<?=__('Are you sure?');?>","<?=__('Remove member ');?>"+record.data.name+"?",function(){
                                             Ext.Ajax.request({
-                                                url: '/users/delete',
+                                                url: '/clubs/removeMember',
                                                 params: {user_id: record.data.id},
                                                 success: function (response, opts) {
+                                                    console.log(response);
                                                     var obj = Ext.decode(response.responseText);
                                                     if (obj.success == true){
-                                                        Ext.Msg.alert("<?=__('Deleted');?>",obj.message); 
+                                                        Ext.Msg.alert("<?=__('Removed');?>",obj.message);
                                                     } else {
                                                         Ext.Msg.alert("<?=__('Error');?>",obj.message);
                                                     }
@@ -211,14 +222,19 @@ var usersGrid = new Ext.grid.GridPanel({
                             text:"<?=__('Save');?>",
                             handler: function(){
                                 userEditWindow.items.get('userDataForm').getForm().submit({
-                                    url: '/users/edit',
+                                    url: '/clubs/createMember',
                                     success: function (form, action) {
                                         Ext.Msg.alert("<?=__('Saved');?>", action.result.message);
                                         usersStore.load();  
                                         userEditWindow.close();
                                     },
                                     failure: function (form, action) {
-                                        Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Something went wrong...');?>");
+                                        if(action.response.status == '403'){
+                                            Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Access denied');?>");
+                                        } else {
+                                            Ext.Msg.alert("<?=__('Ooops!');?>","<?=__('Something went wrong...');?>");
+                                        }
+
                                     }
                                 });
                             }

@@ -214,6 +214,7 @@
             $this->User->create();
         } else {
             $saveData['User']['id'] = $this->request->data['User_id'];
+
         }
         
         $saveData['User']['name'] = trim($this->request->data['User_name']);
@@ -222,7 +223,8 @@
         $saveData['User']['username'] = trim($this->request->data['User_mail']);
         $saveData['User']['oib'] = trim($this->request->data['User_oib']);
         $saveData['User']['group_id'] = trim($this->request->data['User_group_id']);
-        
+
+        $saveData['UsersClub']['club_id'] = $this->request->data['User_club_id'];
         
         
         if (!empty($this->request->data['User_password'])){
@@ -234,10 +236,10 @@
         
         
         if ($this->User->saveAll($saveData)){
-            
-            $saveData['ClubMembership']['user_id'] = $this->User->id;
-            $saveData['ClubMembership']['club_id'] = $this->request->data['User_club_id'];
-            $this->User->ClubMembership->save($saveData);
+
+          //  $saveData['ClubMembership']['user_id'] = $this->User->id;
+          //  $saveData['ClubMembership']['club_id'] = $this->request->data['User_club_id'];
+         //   $this->User->ClubMembership->save($saveData);
             
             $response['success'] = true;
             $response['message'] = __('User successfully saved.');

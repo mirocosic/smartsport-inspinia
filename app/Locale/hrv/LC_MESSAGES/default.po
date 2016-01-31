@@ -288,3 +288,9 @@ msgstr "Mjesec"
 
 msgid "All"
 msgstr "Svi"
+
+msgid "Licence"
+msgstr "Licenca"
+
+msgid "Licences"
+msgstr "Licence"

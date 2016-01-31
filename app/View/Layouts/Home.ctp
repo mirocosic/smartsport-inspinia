@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/ext-themes/theme-triton/resources/theme-triton-all.css"/>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
