@@ -22,6 +22,9 @@
     public function view(){
         $this->layout = 'Home';
         $this->autoRender = 'view';
+
+        $this->Club->contain();
+        $this->set('club',$this->Club->findById($this->Session->read('Auth.Club_id')));
     }
     
     public function members(){

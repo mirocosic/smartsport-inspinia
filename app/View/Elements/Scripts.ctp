@@ -16,3 +16,4 @@
 <script src="/js/plugins/chosen/chosen.jquery.js"></script>
 <script src="/js/plugins/pace/pace.min.js"></script>
 <script src="/js/plugins/masonry/masonry.pkgd.min.js"></script>
+<script src="/js/plugins/validate/jquery.validate.min.js"></script>

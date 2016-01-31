@@ -294,3 +294,15 @@ msgstr "Licenca"
 
 msgid "Licences"
 msgstr "Licence"
+
+msgid "Address"
+msgstr "Adresa"
+
+msgid "City"
+msgstr "Grad"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Club info"
+msgstr "Informacije o klubu"
