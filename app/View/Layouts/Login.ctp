@@ -32,40 +32,30 @@
             <div id="LoginFormBgn" style="position: absolute;background-color: white; opacity:0.8; width: 100%; height:100%;"></div>
             <div>
 
-                <h1 class="logo-name">SS</h1>
+                <h1 class="logo-name" style="margin-top:0;">SS</h1>
 
             </div>
             <h3><?=__("Welcome to SmartSport");?></h3>
        
-            <?= $this->Form->create('User',array(
-                'id'=>'LoginForm',
-                'action'=>'login',
-                'class'=>'m-t'));
-            ?>
-            <?= $this->Form->input('email',array(
-                'placeholder'=>__("Email"),
-                'label'=>false,
-                'class'=>'form-control',
-                'div'=>'form-group'));
-            ?>
-            <?= $this->Form->input('password',array(
-                'placeholder'=>__("Password"),
-                'label'=>false,
-                'class'=>'form-control',
-                'div'=>'form-group'));
-            ?>
-        <!--    <form class="m-t" role="form" action="/users/login"> 
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email" required="">
-                </div>
-        
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
-                </div>
-        -->
+                <?= $this->Form->create('User',array(
+                    'id'=>'LoginForm',
+                    'action'=>'login',
+                    'class'=>'m-t'));
+                ?>
+                <?= $this->Form->input('email',array(
+                    'placeholder'=>__("Email"),
+                    'label'=>false,
+                    'class'=>'form-control',
+                    'div'=>'form-group'));
+                ?>
+                <?= $this->Form->input('password',array(
+                    'placeholder'=>__("Password"),
+                    'label'=>false,
+                    'class'=>'form-control',
+                    'div'=>'form-group'));
+                ?>
+                <br/>
                 <button type="submit" class="btn btn-primary block full-width m-b"><?=__("Log in");?></button>
-        
-
                 <a href="/users/reset_password"><small><?=__("Forgot password");?>?</small></a>
                 <p class="text-muted text-center hidden"><small><?=__("Do not have an account?");?></small></p>
                 <br/><br/>

@@ -89,20 +89,24 @@ a:hover {
     background-size: 100%;
 }
 
-#LoginForm input , .cleanInput{
+#LoginForm input , .cleanInput, #RegisterForm input{
     background-color: transparent;
     border: none;
     border-bottom: solid 1px #1ab394;
 
 }
 
+#RegisterForm input:focus{
+    border-bottom: solid 1px #710db6 !important;
+}
+
 #LoginForm input:focus{
-    border-bottom: solid 1px #0D4F41 !important;
+    border-bottom: solid 1px #710db6 !important;
 
 }
 
 .cleanInput:focus{
-    border-bottom: solid 1px #0D4F41 !important;
+    border-bottom: solid 1px #710db6 !important;
 
 }
 
@@ -140,17 +144,34 @@ a:hover {
     color: white;
 }
 
-.fa-spin-hover {
-    -webkit-animation: spin 2s infinite linear;
-    -moz-animation: spin 2s infinite linear;
-    -o-animation: spin 2s infinite linear;
-    animation: spin 2s infinite linear;
+.form-group {
+    margin-bottom: 18px;
 }
 
-.rainbow {
-    background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-    background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-    color:transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+.form-control.error {
+     border:none;
+     border-bottom: solid 1px #b31a29 !important;
+ }
+
+label {
+    font-weight: normal;
+    float:left;
+    margin-bottom: 0px;
+}
+
+label.error {
+    width: 100%;
+    text-align: center;
+}
+
+.modal-header {
+    background-color: #1AB394;
+    color: white;
+    border-radius: 4px 4px 0 0 ;
+}
+
+.nav > li > a i:hover {
+    margin-right: 6px;
+
+    color: #1AB394;
 }

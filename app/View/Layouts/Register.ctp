@@ -14,12 +14,17 @@
     <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
 
 </head>
 
 <body class="gray-bg">
+
+<div class="background-div"></div>
     
-     <div class="loginColumns animated fadeInDown">
+     <div class="loginColumns animated fadeInDown ">
+         <div style="position: relative; padding: 20px;">
+             <div id="LoginFormBgn" style="position: absolute;background-color: white; opacity:0.8; width: 100%; height:100%;"></div>
         <div class="row">
 
             <div class="col-md-6">
@@ -45,15 +50,24 @@
             <div class="col-md-6">
                 <div class="ibox-content">
                      <?= $this->Form->create('User',array('id'=>'RegisterForm', 'action'=>'reset_password','class'=>'m-t'));?>
-                <?= $this->Form->input('email',array('placeholder'=>__("Email"),'label'=>false, 'class'=>'form-control','div'=>'form-group'));?>
-                <?= $this->Form->input('password',array('placeholder'=>__("Password"),'label'=>false, 'class'=>'form-control','div'=>'form-group'));?>
+                <?= $this->Form->input('email',array(
+                    'placeholder'=>__("Email"),
+                    'label'=>false,
+                    'class'=>'form-control cleanInput ',
+                    'div'=>'form-group'));?>
+                <?= $this->Form->input('password',array(
+                    'placeholder'=>__("Password"),
+                    'label'=>false,
+                    'class'=>'form-control cleanInput',
+                    'div'=>'form-group'));?>
                
                 <div class="form-group">
                     <div class="checkbox i-checks text-center"><label class=""> <input type="checkbox"><i></i> Agree the terms and policy </label></div>
                 </div>
+                    <br/><br/>
                 <button type="submit" class="btn btn-primary block full-width m-b"><?=__('Register');?></button>
 
-                <p class="text-muted text-center"><small>Already have an account?</small></p>
+                <p class="text-muted text-center"><small><?=__("Already have an account");?>?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="/users/login"><?=__('Log in');?></a>
             </form>
             
@@ -82,6 +96,7 @@
                  </ul>
             </div>
         </div>
+             </div>
     </div>
 
     <!-- Mainly scripts -->
@@ -101,6 +116,8 @@
     </script>
      
      <script>
+
+
          $("#RegisterForm").validate({
             rules: {
                 'data[User][email]': { required : true, email:true },

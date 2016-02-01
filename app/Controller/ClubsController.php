@@ -588,4 +588,34 @@
         }
          return json_encode($response);
     }
+
+    function editInfo(){
+        if (empty($this->request->data)){
+            $response['success'] = false;
+            $response['message'] = __('Empty data sent');
+            return json_encode($response);
+        }
+
+        $data = [
+            'Club'=>[
+                'id'=>$this->Session->read('Auth.Club_id'),
+                'name'=>$this->request->data('name'),
+                'address'=>$this->request->data('address'),
+                'city'=>$this->request->data('city'),
+                'zip_code'=>$this->request->data('zip_code'),
+                'mail'=>$this->request->data('mail'),
+                'phone'=>$this->request->data('phone'),
+                'oib'=>$this->request->data('oib'),
+            ]
+        ];
+
+        if ($this->Club->save($data)){
+            $response['success'] = true;
+            $response['message'] = __("Saved!");
+        } else {
+            $response['success'] = false;
+            $response['message'] = __('Error while saving. Please contact your Administrator.');
+        }
+        return json_encode($response);
+    }
 }

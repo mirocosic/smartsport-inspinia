@@ -1,6 +1,6 @@
 <div class="row  border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>NK Dinamo</h2>
+        <h2><?=$club['Club']['name'];?></h2>
 
     </div>
 
@@ -121,21 +121,72 @@
 <script>
 
     $(document).ready(function() {
+
+        $.validator.addMethod('check_oib', function(oib, element) {
+            oib = oib.toString();
+            if (oib.length != 11) return false;
+
+            var b = parseInt(oib, 10);
+            if (isNaN(b)) return false;
+
+            var a = 10;
+            for (var i = 0; i < 10; i++) {
+                a = a + parseInt(oib.substr(i, 1), 10);
+                a = a % 10;
+                if (a == 0) a = 10;
+                a *= 2;
+                a = a % 11;
+            }
+            var kontrolni = 11 - a;
+            if (kontrolni == 10) kontrolni = 0;
+
+            return kontrolni == parseInt(oib.substr(10, 1));
+
+        }, "Nepostojeći poštanski broj");
+
         $('#editClubInfoForm').validate({
             rules: {
                 'name': {required: true},
                 'address': {required: true},
-                'name': {required: true},
-                'name': {required: true},
-                'name': {required: true},
-                'name': {required: true},
+                'city': {required: true},
+                'zip_code': { required : true, minlength: 5,maxlength:5, digits:true },
+                'mail': {required: true, email:true },
+                'phone': {required: true},
+                'oib': {required: true, digits:true, minlength:11,maxlength:11,check_oib:true},
 
             },
             messages: {
-                'name': {required: 'Obavezno polje'},
+                'name': {required: "<?=__('Please enter field');?>"},
+                'address': {required: "<?=__('Please enter field');?>"},
+                'city': {required: "<?=__('Please enter field');?>"},
+                'zip_code': {required: "<?=__('Please enter field');?>",digits:"<?=__("Please enter valid ZIP code");?>"},
+                'mail': {required: "<?=__('Please enter field');?>", email:"<?=__('Please enter valid mail');?>"},
+                'phone': {required: "<?=__('Please enter field');?>"},
+                'oib': {
+                    required: "<?=__('Please enter field');?>",
+                    digits:"<?=__('Please enter valid OIB');?>",
+                    minlength:"<?=__('Please enter valid OIB');?>",
+                    maxlength:"<?=__('Please enter valid OIB');?>",
+                    check_oib:"<?=__('Please enter valid OIB');?>",
+                }
             },
             submitHandler:function(){
-
+                $.ajax({
+                    url:'/clubs/editInfo',
+                    data: $("#editClubInfoForm").serialize(),
+                    type:'POST',
+                    dataType:'JSON',
+                    success: function(response){
+                        //toastr.success(response.message);
+                        $('#editClubInfo').modal('hide');
+                        location.reload();
+                    },
+                    error: function(response){
+                        if(response.status = '403'){
+                            toastr.error(<?=__("Ooops");?>);
+                        } else {toastr.error(<?=__("Ooops");?>);}
+                    }
+                });
                 return false;
             }
 

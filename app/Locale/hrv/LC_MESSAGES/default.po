@@ -306,3 +306,12 @@ msgstr "Telefon"
 
 msgid "Club info"
 msgstr "Informacije o klubu"
+
+msgid "Edit info"
+msgstr "Izmijeni podatke"
+
+msgid "Cancel"
+msgstr "Odustani"
+
+msgid "Already have an account"
+msgstr "Već imaš račun"
