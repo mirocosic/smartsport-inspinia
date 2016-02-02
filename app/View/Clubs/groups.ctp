@@ -1,6 +1,5 @@
 <div id="PageContent" class="wrapper wrapper-content animated fadeInRight">
 
-
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox-content" style="margin-bottom: 20px;">
@@ -32,11 +31,18 @@
                         </div>
                         <div class="ibox-content">
 
-                            <ul id="ClubGroup-All" class="connectedSortable sortable-groups" style="padding:0;min-height:20px;">
+                            <ul id="ClubGroup-All" class="connectedSortable sortable-all" style="padding:0;min-height:20px;">
                                 <?if($members):?>
                                     <?foreach($members as $member):?>
                                         <li id="club-group-user-id-<?=$member['id'];?>" class=" dd-item">
-                                            <div id="0" class="dd-handle"><?=$member['name'].' '.$member['surname'];?></div>
+                                            <div id="0" class="dd-handle">
+
+                                                <img class="img-circle" width="30px" src="/img/<?
+                                                if (!empty($member['Image'])) {
+                                                    echo $member['Image'][0]['name'];
+                                                    }else{ echo 'user.jpg';}
+                                                ;?>"/>
+                                                <?=$member['name'].' '.$member['surname'];?></div>
                                         </li>
                                     <?endforeach;?>
                                 <?endif;?>
@@ -77,7 +83,7 @@
             <?endforeach;?>
         <?endif;?>
     </div>
-   
+
 </div>
  <style>
 
@@ -158,29 +164,132 @@
             connectWith: ".connectedSortable"
         }).disableSelection();
 
+        $(".sortable-all").sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+
         $(".sortable-groups").sortable({
+            start:function(event, ui){
+                $(ui.item).addClass('dd-item-dragged');
+                $('.grid').masonry("layout");
+
+            },
+            stop: function( event, ui ) {
+
+                $(ui.item).removeClass('dd-item-dragged');
+                $('.grid').masonry("layout");
+
+            },
+            update: function(event, ui){
+                var clubGroupId = $(this).attr('id');
+                var data = $(this).sortable('toArray');
+                var parent = ui.item.parent().attr('id');
+
+                if(parent == 'ClubGroup-All'){
+                    updateClubGroups(clubGroupId, data);
+                    return;
+                }
+
+                var data = $( ui.item.parent()).sortable('toArray');
+
+                var count = 0;
+                for(var i = 0; i < data.length; ++i){
+                    if(data[i] == ui.item.attr('id'))
+                        count++;
+                }
+
+                if(count > 1){
+
+                    $(this).sortable("cancel");
+                } else {
+                    var data = $(this).sortable('toArray');
+                    updateClubGroups(clubGroupId, data);
+                }
+
+
+            }
+
+        });
+
+        $(".sortable-all").sortable({
             start:function(event, ui){
                 $(ui.item).addClass('dd-item-dragged');
                 $('.grid').masonry("layout");
             },
             stop: function( event, ui ) {
                 $(ui.item).removeClass('dd-item-dragged');
-
                 $('.grid').masonry("layout");
             },
             update: function(event, ui){
                 var clubGroupId = $(this).attr('id');
                 var data = $(this).sortable('toArray');
+                var parent = ui.item.parent().attr('id');
+                if(parent == 'ClubGroup-All'){
+                    updateClubGroups(clubGroupId, data);
+                    return;
+                }
 
-                updateClubGroups(clubGroupId, data);
+                 var data = $( ui.item.parent()).sortable('toArray');
+
+                 var count = 0;
+                 for(var i = 0; i < data.length; ++i){
+                 if(data[i] == ui.item.attr('id'))
+                    count++;
+                 }
+
+                 if(count > 1){
+
+                     $(this).children("#"+ui.item.attr('id')).first().remove();
+                     $(this).sortable("cancel");
+                 }
+
+                 updateClubGroups(clubGroupId, data);
+
+            },
+            remove:function(event, ui){
+                var parent = ui.item.parent().attr('id');
+
+                var cloned = ui.item.clone();
+                cloned.appendTo($(this));
+                cloned.removeClass('dd-item-dragged');
+
+                var data = $(this).sortable("toArray");
+                var count = 0;
+                for(var i = 0; i < data.length; ++i){
+                    if(data[i] == ui.item.attr('id'))
+                        count++;
+                }
+
+                if(count > 1){
+                    cloned.remove();
+                } else {
+
+                }
+
+
+            },
+            receive:function(event, ui){
+                var count = 0;
+                var data = $(this).sortable("toArray");
+                for(var i = 0; i < data.length; ++i){
+                    if(data[i] == ui.item.attr('id'))
+                        count++;
+                }
+                if(count > 1){
+                    var itemsID = $(ui.item).attr('id');
+                    var children = $(this).find("#"+itemsID);
+                    children.first().remove(); // ovo se raspadne kada se item vraca iznad postojeceg
+                    // vjerojatno taj item nije u domu jos kada se ovaj event vrti...
+                }
             }
+
         });
 
-        // to do
+        // TODO
         $(document).on('hide.bs.collapse', function(e){
             alert('Fired!');
         });
-
+        // TODO
         $('.ibox-content').on('show.bs.collapse', function(e){
             alert('Fired!');
         });

@@ -47,7 +47,16 @@
 
         $members = $this->Club->find('first',[
             'conditions'=>['Club.id'=>$this->Session->read('Auth.Club_id')],
-            'contain'=>['User.id','User.name','User.surname']
+            'contain'=>[
+                'User'=>[
+                    'id','name','surname',
+                    'Image'=>[
+                        'conditions'=>[
+                            'default'=>true
+                        ]
+                    ]
+                ]
+            ]
         ]);
         $this->set('members',$members['User']);
     }
