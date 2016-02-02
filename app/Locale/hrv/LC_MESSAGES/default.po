@@ -315,3 +315,6 @@ msgstr "Odustani"
 
 msgid "Already have an account"
 msgstr "Već imaš račun"
+
+msgid "Please enter field"
+msgstr "Molimo unesite polje"
