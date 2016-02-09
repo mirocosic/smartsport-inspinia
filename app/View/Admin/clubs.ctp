@@ -107,7 +107,11 @@ var usersGrid = new Ext.grid.GridPanel({
                                                 clubEditWindow.close();
                                             },
                                             failure: function (form, action) {
-                                                Ext.Msg.alert("<?=__('Error');?>", action.result.message);
+                                                if (response.status == '403'){
+                                                    Ext.Msg.alert("<?=__('Error');?>","<?=__('Access denied');?>");
+                                                } else {
+                                                    Ext.Msg.alert("<?=__('Error');?>",response.message);
+                                                }
                                             }
                                         });
                                     }
@@ -129,7 +133,12 @@ var usersGrid = new Ext.grid.GridPanel({
                                                     clubsStore.load();
                                                 },
                                                 failure: function (response, opts) {
-                                                    Ext.Msg.alert("<?=__('Error');?>",response.message);
+                                                    if (response.status == '403'){
+                                                        Ext.Msg.alert("<?=__('Error');?>","<?=__('Access denied');?>");
+                                                    } else {
+                                                        Ext.Msg.alert("<?=__('Error');?>",response.message);
+                                                    }
+
                                                 }
                                             });
                                         })
@@ -217,7 +226,11 @@ var usersGrid = new Ext.grid.GridPanel({
                                                 }
                                             },
                                             failure:function(response){
-                                                 Ext.Msg.alert('Ne');
+                                                if (response.status == '403'){
+                                                    Ext.Msg.alert("<?=__('Error');?>","<?=__('Access denied');?>");
+                                                } else {
+                                                    Ext.Msg.alert("<?=__('Error');?>",response.message);
+                                                }
                                             }
                                         });
                                     }
@@ -262,7 +275,11 @@ var usersGrid = new Ext.grid.GridPanel({
                                                         }
                                                     },
                                                     failure:function(response){
-                                                         Ext.Msg.alert("<?=__('Error');?>");
+                                                        if (response.status == '403'){
+                                                            Ext.Msg.alert("<?=__('Error');?>","<?=__('Access denied');?>");
+                                                        } else {
+                                                            Ext.Msg.alert("<?=__('Error');?>",response.message);
+                                                        }
                                                     }
                                                 });
                                             }
@@ -312,7 +329,11 @@ var usersGrid = new Ext.grid.GridPanel({
                                         clubEditWindow.close();
                                     },
                                     failure: function (form, action) {
-                                        Ext.Msg.alert("<?=__('Error');?>", action.result.message);
+                                        if (response.status == '403'){
+                                            Ext.Msg.alert("<?=__('Error');?>","<?=__('Access denied');?>");
+                                        } else {
+                                            Ext.Msg.alert("<?=__('Error');?>",response.message);
+                                        }
                                     }
                                 });
                             }

@@ -11,7 +11,9 @@
                                     <strong class="font-bold">
                                         <?=AuthComponent::user('fullname');?>
                                     </strong>
-                             </span> <span class="text-muted text-xs block">CTO <b class="caret"></b></span> </span> </a>
+                             </span> <span class="text-muted text-xs block">
+                                    <?=AuthComponent::user('role');?>
+                                    <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeIn m-t-xs">
                                 <li><a href="#"><?=__("Profile");?></a></li>
                                 <li><a href="/users/logout"><?=__("Logout");?></a></li>

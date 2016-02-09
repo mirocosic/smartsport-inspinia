@@ -433,8 +433,10 @@
         
         if (empty($this->request->data['Club_id'])){
             $this->Club->create();
+            $saveData['Club']['uuid'] = uniqid();
         } else {
             $saveData['Club']['id'] = $this->request->data['Club_id'];
+          
         }
         
         $saveData['Club']['name'] = trim($this->request->data['Club_name']);

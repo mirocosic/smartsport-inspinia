@@ -36,6 +36,7 @@
 
 
               // wow, this is soooo bad :)) - miro
+                // not that bad, just incomplete
               $this->Session->write('Auth.Club_id', $user['ClubMembership'][0]['club_id']);
 
               if($profileImg){
