@@ -23,7 +23,8 @@
                         SS
                     </div>
                 </li>
-                <li <?if($this->params['controller'] == 'users'){echo 'class="active"';}?>>
+                <?if($acl->check(array('User' => $user), 'controllers/Users')):?>
+                    <li <?if($this->params['controller'] == 'users'){echo 'class="active"';}?>>
                     <a href="#"><i class="fa fa-user fa-fw"></i><span class="nav-label"><?=__("Profile");?></span>
                         <span class="fa arrow fa-fw"></span>
                     </a>
@@ -39,8 +40,10 @@
                         </li>
                     </ul>
                 </li>
+                <?endif;?>
 
-                <li <?if($this->params['controller'] == 'clubs' ||$this->params['controller'] == 'club'){echo 'class="active"';}?>>
+                <?if($acl->check(array('User' => $user), 'controllers/Clubs')):?>
+                    <li <?if($this->params['controller'] == 'clubs' ||$this->params['controller'] == 'club'){echo 'class="active"';}?>>
                     <a href="/clubs/view"><i class="fa fa-slideshare fa-fw"></i> <span class="nav-label"><?=__("Club");?></span> <span class="fa arrow fa-fw"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li <?if($this->params['action'] == 'view'){echo 'class="active"';}?>>
@@ -69,8 +72,9 @@
                         </li>
                     </ul>
                 </li>
-
-                <li <?if($this->params['controller'] == 'alliance'){echo 'class="active"';}?>>
+                <?endif;?>
+                <?if($acl->check(array('User' => $user), 'controllers/Alliance')):?>
+                    <li <?if($this->params['controller'] == 'alliance'){echo 'class="active"';}?>>
                     <a href="/alliance/"><i class="fa fa-bank fa-fw"></i> <span class="nav-label"><?=__("Alliance");?></span> <span class="fa arrow fa-fw"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li <?if($this->params['action'] == 'clubs'){echo 'class="active"';}?>>
@@ -84,8 +88,9 @@
                         </li>
                     </ul>
                 </li>
-
-                <li <?if($this->params['controller'] == 'competitions'){echo 'class="active"';}?>>
+                <?endif;?>
+                <?if($acl->check(array('User' => $user), 'controllers/Competitions')):?>
+                    <li <?if($this->params['controller'] == 'competitions'){echo 'class="active"';}?>>
                     <a href="/alliance/"><i class="fa fa-trophy fa-fw"></i> <span class="nav-label"><?=__("Competitions");?></span> <span class="fa arrow fa-fw"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li <?if($this->params['action'] == 'create'){echo 'class="active"';}?>>
@@ -94,9 +99,10 @@
 
                     </ul>
                 </li>
-                
-               
-                <li <?if($this->params['controller'] == 'admin'){echo 'class="active"';}?>>
+                <?endif;?>
+
+                <?if($acl->check(array('User' => $user), 'controllers/Admin')):?>
+                    <li <?if($this->params['controller'] == 'admin'){echo 'class="active"';}?>>
                     <a href="#"><i class="fa fa-fort-awesome fa-fw"></i> <span class="nav-label">Admin</span><span class="fa arrow fa-fw"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
@@ -117,6 +123,7 @@
                     </ul>
                     
                 </li>
+                <?endif;?>
                 <li <?if($this->params['controller'] == 'future'){echo 'class="active"';}?>>
                     <a href="/#"><i class="fa fa-magic "></i> <span class="nav-label "><?=__("Tha Future");?></span> </a>
                 </li>

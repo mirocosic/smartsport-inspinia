@@ -1,7 +1,7 @@
 <?php class AdminController extends AppController {
 
     var $components = array('Acl','Access');
-    var $uses = array('Aco','User');
+    var $uses = array('Aco','User','Group');
     
     function beforeFilter() {
         parent::beforeFilter();
@@ -17,6 +17,17 @@
    
     function users(){
        $this->layout = 'Home';
+    }
+
+    function addGroup(){
+        $this->layout = false;
+        $this->autoRender = false;
+
+        $this->Group->save(array(
+            'Group'=>array(
+                'name'=>'Club managers'
+            )
+        ));
     }
     
     function clubs(){}
@@ -88,12 +99,26 @@
         //print_r($this->User->hasAndBelongsToMany);
     }
 
+    function addPerm(){
+        $this->layout = false;
+        $this->autoRender = false;
+
+        $group = $this->User->Group;
+        $group->id = 5;
+
+        if($this->Acl->allow($group, 'controllers/Settings')){
+            echo 'Success';
+        } else {
+            echo 'Failed';
+        }
+    }
+
     function install() {
         $group =& $this->User->Group;
 
         //Allow admins to everything
         $group->id = 1;
-        $this->Acl->allow($group, 'controllers');
+     //   $this->Acl->allow($group, 'controllers');
 
         //allow users
       //  $group->id = 2;

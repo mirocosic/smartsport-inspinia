@@ -70,8 +70,9 @@ class AppController extends Controller {
         //$this->Auth->logoutRedirect = array( 'controller' => 'static', 'action' => 'index', 'language'=>$this->Session->read('Config.language'));
         //$this->Auth->loginRedirect = array( 'controller' => 'static', 'action' => 'dashboard', 'language'=>$this->Session->read('Config.language'));
         //this->Auth->loginAction = array( 'controller'=>'users', 'action'=>'login', 'language'=>$this->Session->read('Config.language'));
-        
-        
+
+       $this->set('user', $this->Auth->user());
+       $this->set('acl', $this->Acl);
        
     }
     

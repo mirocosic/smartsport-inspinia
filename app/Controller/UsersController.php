@@ -225,7 +225,7 @@
         $saveData['User']['oib'] = trim($this->request->data['User_oib']);
         $saveData['User']['group_id'] = trim($this->request->data['User_group_id']);
 
-        $saveData['UsersClub']['club_id'] = $this->request->data['User_club_id'];
+        $saveData['UsersClub']['club_id'] = $this->request->data('User_club_id');
         
         
         if (!empty($this->request->data['User_password'])){
@@ -258,7 +258,7 @@
         $this->autoRender = false;
         
         $users = $this->User->find('all',[
-            'fields'=>['User.id','User.username','User.name','User.surname','User.mail','User.oib']
+            'fields'=>['User.id','User.username','User.name','User.surname','User.mail','User.oib','User.group_id']
         ]);
        
         return json_encode($users);

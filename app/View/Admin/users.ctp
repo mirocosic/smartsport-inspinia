@@ -13,7 +13,7 @@ Ext.onReady(function() {
             {name:'User.name',mapping:'User.name'},
             {name:'User.surname',mapping:'User.surname'},
             {name:'User.mail',mapping:'User.mail'},
-            
+            {name:'User.group_id',mapping:'User.group_id'},
             {name:'User.oib',mapping:'User.oib'}
 
         ],
@@ -41,7 +41,7 @@ var usersGrid = new Ext.grid.GridPanel({
             {header:'<?=__("Name");?>',dataIndex:'User.name'},
             {header:'<?=__("Surname");?>',dataIndex:'User.surname'},
             {header:'<?=__("Mail");?>',dataIndex:'User.mail'},
-            
+            {header:'<?=__("Group");?>',dataIndex:'User.group_id'},
             {header:'<?=__("OIB");?>',dataIndex:'User.oib'},
            
             {
@@ -91,6 +91,10 @@ var usersGrid = new Ext.grid.GridPanel({
                                     name:"User.oib",
                                     fieldLabel:"<?=__('OIB');?>",
                                     allowBlank: true
+                                },{
+                                    name:"User.group_id",
+                                    fieldLabel:"<?=__('Group_id');?>",
+                                    allowBlank: false
                                 }],
                                 buttons:[{
                                     formBind: true,
