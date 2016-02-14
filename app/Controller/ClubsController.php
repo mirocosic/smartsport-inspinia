@@ -563,6 +563,8 @@
         $saveData['User']['mail'] = trim($this->request->data['User_mail']);
         $saveData['User']['username'] = trim($this->request->data['User_mail']);
         $saveData['User']['oib'] = trim($this->request->data['User_oib']);
+        $saveData['User']['address'] = trim($this->request->data('User_address'));
+        $saveData['User']['phone'] = trim($this->request->data('User_phone'));
 
         if (!empty($this->request->data['User_password'])){
             App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');

@@ -6,11 +6,7 @@
 
 </div>
 <div class="row">
-    <div class="ibox col-md-3">
-        <img alt="image" class="img-responsive" src="/img/profilna.jpg">
-    </div>
-
-    <div class="ibox col-md-4">
+    <div class="ibox col-md-6">
         <div class="ibox-title">
             <h5><?=__("Club info");?></h5>
             <div class="ibox-tools">
@@ -18,7 +14,10 @@
             </div>
         </div>
         <div class="ibox-content">
-
+            <div class="col-md-4">
+                <img alt="image" class="img-responsive" src="/img/profilna.jpg">
+            </div>
+            <div class="col-md-8">
                 <dl class="dl-horizontal">
 
                     <dt><?=__("Address");?></dt> <dd><?=$club['Club']['address'].', '.$club['Club']['zip_code'].' '.$club['Club']['city'];?></dd>
@@ -27,6 +26,8 @@
                     <dt><?=__("OIB");?></dt> <dd><?=$club['Club']['oib'];?></dd>
                 </dl>
 
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>

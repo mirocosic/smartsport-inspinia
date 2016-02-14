@@ -14,7 +14,10 @@ Ext.onReady(function() {
             {name:'User.surname',mapping:'surname'},
             {name:'User.mail',mapping:'mail'},
             {name:'User.group_id',mapping:'group_id'},
-            {name:'User.oib',mapping:'oib'}
+            {name:'User.oib',mapping:'oib'},
+            {name:'User.address',mapping:'address'},
+            {name:'User.phone',mapping:'phone'}
+
 
         ],
         proxy: {
@@ -45,7 +48,8 @@ var usersGrid = new Ext.grid.GridPanel({
             {header:'<?=__("Surname");?>',dataIndex:'User.surname'},
             {header:'<?=__("Mail");?>',dataIndex:'User.mail',width:150},
             {header:'<?=__("OIB");?>',dataIndex:'User.oib'},
-           
+            {header:'<?=__("Address");?>',dataIndex:'User.address'},
+            {header:'<?=__("Phone");?>',dataIndex:'User.phone'},
             {
 
                 align: 'center',
@@ -104,6 +108,17 @@ var usersGrid = new Ext.grid.GridPanel({
                                     value:<?=$this->Session->read('Auth.User.group_id');?>,
                                     allowBlank: true,
                                     hidden:true
+                                },{
+                                    name:"User.address",
+                                    fieldLabel:"<?=__('Address');?>",
+                                    allowBlank: true
+
+                                },{
+                                    name:"User.phone",
+                                    fieldLabel:"<?=__('Phone');?>",
+                                    allowBlank: true
+
+
                                 }],
                                 buttons:[{
                                     formBind: true,
