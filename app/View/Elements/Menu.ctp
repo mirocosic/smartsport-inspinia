@@ -65,7 +65,7 @@
                             <a href="#"><i class="fa fa-area-chart fa-fw"></i> <span class="nav-label">Statistike</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-calendar fa-fw"></i> <span class="nav-label"><?=__('Calendar');?></span></a>
+                            <a href="/clubs/calendar"><i class="fa fa-calendar fa-fw"></i> <span class="nav-label"><?=__('Calendar');?></span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-book fa-fw"></i> <span class="nav-label"><?=__('Reports');?></span></a>

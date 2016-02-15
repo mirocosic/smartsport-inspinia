@@ -19,6 +19,9 @@
     <link href="/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <link href="/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
 
+    <link href="/css/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
+    <link href="/css/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' media='print'>
+
 
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">

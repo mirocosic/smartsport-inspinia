@@ -16,7 +16,8 @@ Ext.onReady(function() {
             {name:'User.group_id',mapping:'group_id'},
             {name:'User.oib',mapping:'oib'},
             {name:'User.address',mapping:'address'},
-            {name:'User.phone',mapping:'phone'}
+            {name:'User.phone',mapping:'phone'},
+            {name:'User.active',mapping:'active'}
 
 
         ],
@@ -50,6 +51,9 @@ var usersGrid = new Ext.grid.GridPanel({
             {header:'<?=__("OIB");?>',dataIndex:'User.oib'},
             {header:'<?=__("Address");?>',dataIndex:'User.address'},
             {header:'<?=__("Phone");?>',dataIndex:'User.phone'},
+            {header:'<?=__("Active");?>',dataIndex:'User.active',renderer:function(val){
+                if(val){return "<?=__('Yes');?>"} else {return "<?=__('No');?>"}
+            }},
             {
 
                 align: 'center',
@@ -117,8 +121,11 @@ var usersGrid = new Ext.grid.GridPanel({
                                     name:"User.phone",
                                     fieldLabel:"<?=__('Phone');?>",
                                     allowBlank: true
-
-
+                                },{
+                                    xtype:'checkbox',
+                                    name:"User.active",
+                                    fieldLabel:"<?=__('Active');?>",
+                                    uncheckedValue:0
                                 }],
                                 buttons:[{
                                     formBind: true,
@@ -221,6 +228,12 @@ var usersGrid = new Ext.grid.GridPanel({
                             fieldLabel:"<?=__('OIB');?>",
                             allowBlank: true,
                             hidden:true
+                        },{
+                            xtype:'checkbox',
+                            name:'User.active',
+                            fieldLabel:'<?=__('Active');?>',
+
+
                         },{
                             name:"User.club_id",
                             value:<?=$this->Session->read('Auth.Club_id');?>,

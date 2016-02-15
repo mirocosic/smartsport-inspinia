@@ -224,6 +224,7 @@
         $saveData['User']['username'] = trim($this->request->data['User_mail']);
         $saveData['User']['oib'] = trim($this->request->data['User_oib']);
         $saveData['User']['group_id'] = trim($this->request->data['User_group_id']);
+        $saveData['User']['active'] = trim($this->request->data['User_active']);
 
         $saveData['UsersClub']['club_id'] = $this->request->data('User_club_id');
         

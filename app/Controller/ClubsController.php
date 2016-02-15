@@ -420,6 +420,11 @@
         }
     }
 
+    function calendar(){
+        $this->layout = 'Home';
+        $this->autoRender = 'calendar';
+    }
+
     function add(){
         
     }
@@ -565,6 +570,7 @@
         $saveData['User']['oib'] = trim($this->request->data['User_oib']);
         $saveData['User']['address'] = trim($this->request->data('User_address'));
         $saveData['User']['phone'] = trim($this->request->data('User_phone'));
+        $saveData['User']['active'] = trim($this->request->data('User_active'));
 
         if (!empty($this->request->data['User_password'])){
             App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');

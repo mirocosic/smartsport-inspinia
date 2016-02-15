@@ -318,3 +318,6 @@ msgstr "Već imaš račun"
 
 msgid "Please enter field"
 msgstr "Molimo unesite polje"
+
+msgid "Active"
+msgstr "Aktivan"
